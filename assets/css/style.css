@@ -954,7 +954,7 @@ section {
 }
 /* manually addedd */
 /* loading class */
-#loading-overlay {
+#loading-overlay-site {
   position: fixed;
   top: 0;
   left: 0;
@@ -967,7 +967,7 @@ section {
   z-index: 9999;
 }
 
-.loader {
+.loaderSite {
   border: 8px solid #f3f3f3;
   border-top: 8px solid #3498db;
   border-radius: 50%;
@@ -981,7 +981,7 @@ section {
   100% { transform: rotate(360deg); }
 }
 
-#site-content {
+#mysite-content {
   display: none;
 }
 
