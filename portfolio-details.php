@@ -1,17 +1,4 @@
-<?php
 
-
-{
-    include 'config\config.php';
-    $connection = new mysqli($servername, $username, $password,$dbname); 
-    $dbSuccess=FALSE;
-    if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-    }
-    else $dbSuccess=TRUE;
-  
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -105,71 +92,61 @@
 
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
-  <div class="container">
+    <?php
+$jsonData = file_get_contents('projects.json');
+$projects = json_decode($jsonData, true);
+
+$name = $_GET['name'] ?? '';
+
+$project = null;
+foreach ($projects as $p) {
+    if ($p['name'] === $name) {
+        $project = $p;
+        break;
+    }
+}
+
+if (!$project) {
+    echo "<h3>Project not found!</h3>";
+    exit;
+}
+?>
+
+<div class="container">
     <div class="row gy-4">
-      <div class="col-lg-8">
-        <div class="portfolio-details-slider swiper">
-          <div class="swiper-wrapper align-items-center">
-
-            <?php
-            $name = $_GET['name'];
-            // PHP code to retrieve data from the database
-            // Assuming you have established a database connection
-
-            // Perform the query to fetch data
-            $query = "SELECT * FROM PortfolioPic WHERE project_name = '$name'";
-
-            $result = mysqli_query($connection, $query);
-            
-            // Iterate through the fetched rows and display the images
-            while ($row = mysqli_fetch_assoc($result)) {
-              $pictureUrl = $row['picture_url'];
-              echo '<div class="swiper-slide">';
-
-              $projectCatagory = $row['project_catagory'];
-              $projectClient = $row['project_client'];
-              $projectUrl = $row['project_url'];
-              $projectDescription = $row['project_description'];
-              $projectTime = $row['created_at'];
-
-              echo '<img src="' . $pictureUrl . '" alt="">';
-              echo '<div class="swiper-pagination"></div>'; // Move the pagination here
-              echo '</div>';
-            }
-            
-            ?>
-
-          </div>
+        <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+                <div class="swiper-wrapper align-items-center">
+                    <?php
+                    foreach ($project['images'] as $image) {
+                        echo '<div class="swiper-slide">';
+                        echo '<img src="' . $image . '" alt="">';
+                        echo '</div>';
+                    }
+                    ?>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
         </div>
-      </div>
 
-      <div class="col-lg-4">
-        <div class="portfolio-info">
-          <h3>Project information</h3>
-          <ul>
-            <?php  
-         
-            // Display project information
-            echo '<li><strong>Category</strong>: ' . $projectCatagory . '</li>';
-            echo '<li><strong>Client</strong>: ' . $projectClient . '</li>';
-            echo '<li><strong>Project URL</strong>: <a href="#">' . $projectUrl . '</a></li>';
-            echo '<li><strong>Client</strong>: ' . $projectTime . '</li>';
-            
-            ?>
-          </ul>
+        <div class="col-lg-4">
+            <div class="portfolio-info">
+                <h3>Project Information</h3>
+                <ul>
+                    <li><strong>Category</strong>: <?= $project['category'] ?></li>
+                    <li><strong>Client</strong>: <?= $project['client'] ?></li>
+                    <li><strong>Project URL</strong>: <a href="<?= $project['url'] ?>" target="_blank"><?= $project['url'] ?></a></li>
+                    <li><strong>Completion Date</strong>: <?= $project['time'] ?></li>
+                </ul>
+            </div>
+            <div class="portfolio-description">
+                <h2>Project Overview</h2>
+                <p><?= $project['description'] ?></p>
+            </div>
         </div>
-        <div class="portfolio-description">
-          <h2>This is an example of portfolio detail</h2>
-          <p>
-          <?php
-          
-           echo ".$projectDescription.";
-           ?>
-          </p>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
 </section>
 
     <!-- End Portfolio Details Section -->
