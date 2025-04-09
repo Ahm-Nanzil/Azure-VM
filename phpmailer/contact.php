@@ -52,7 +52,7 @@ $emailTemplate = '
         <!-- Header -->
         <tr>
             <td align="center" bgcolor="#2e58ff" style="padding: 20px 24px; border-radius: 8px 8px 0 0;">
-                <h1 style="margin: 0; color: white; font-size: 24px; font-weight: 700;">New Inquiry from Your Portfolio Website</h1>
+                <h1 style="margin: 0; color: white; font-size: 24px; font-weight: 700;">New Inquiry</h1>
             </td>
         </tr>
         
