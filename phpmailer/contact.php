@@ -60,11 +60,7 @@ $emailTemplate = '
         <tr>
             <td bgcolor="#ffffff" style="padding: 24px; border-left: 1px solid #dddddd; border-right: 1px solid #dddddd;">
                 <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-                    <tr>
-                        <td style="padding: 0 0 20px 0;">
-                            <p style="margin: 0; font-size: 16px; line-height: 1.5;">You have received a new message from your website contact form.</p>
-                        </td>
-                    </tr>
+                    
                     
                     <!-- Sender Details -->
                     <tr>
