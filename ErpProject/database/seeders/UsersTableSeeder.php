@@ -3207,10 +3207,24 @@ class UsersTableSeeder extends Seeder
             ['name' => 'edit coupon'],
             ['name' => 'delete coupon'],
         ];
+        $superAdminRole->givePermissionTo($superAdminPermissions);
 
+        $superAdmin = User::create(
+            [
+                'name' => 'superadmin',
+                'email' => 'superadmin@example.com',
+                'password' => Hash::make('1234'),
+                'type' => 'superadmin',
+                'default_pipeline' => 1,
+                'plan' => 1,
+                'lang' => 'en',
+                'avatar' => '',
+                'created_by' => 1,
+            ]
+        );
+        $superAdmin->assignRole($superAdminRole);
 
-
-        // custome
+        // customer
         $customerRole       = Role::create(
             [
                 'name' => 'customer',
@@ -3958,7 +3972,7 @@ class UsersTableSeeder extends Seeder
                         'created_by' => $company->id,
                     ]
                 );
-        
+
                 $employeePermission = [
                     ['name' => 'show hrm dashboard'],
                     ['name' => 'manage user'],
@@ -3970,7 +3984,7 @@ class UsersTableSeeder extends Seeder
                     ['name' => 'manage company policy'],
                     ['name' => 'manage event'],
                     ['name' => 'manage meeting'],
-                    ['name' => 'manage award'],            
+                    ['name' => 'manage award'],
                     ['name' => 'manage promotion'],
                     ['name' => 'manage complaint'],
                     ['name' => 'manage warning'],
@@ -3981,9 +3995,9 @@ class UsersTableSeeder extends Seeder
                     ['name' => 'manage announcement'],
                     ['name' => 'manage leave'],
                 ];
-        
+
                 $employeeRole->givePermissionTo($employeePermission);
-        
+
                 $employee = User::create(
                     [
                         'name' => 'employee',

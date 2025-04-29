@@ -10,7 +10,7 @@
 @endsection
 
 @section('container')
-{{--    <p style="color:red;"><strong>Default Super Admin Created : superadmin@example.com / 1234</strong></p>--}}
+    <p style="color:red;"><strong>Default Super Admin Created : superadmin@example.com / 1234</strong></p>
     <p style="color:red;"><strong>Default Company Created : company@example.com / 1234</strong></p>
     <p style="color:red;"><strong>Default User Created : accountant@example.com / 1234</strong></p>
 
