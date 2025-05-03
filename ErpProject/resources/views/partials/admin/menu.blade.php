@@ -63,7 +63,7 @@
     <nav class="dash-sidebar light-sidebar sidebar-collapsed">
 @endif
     <div class="navbar-wrapper">
-        <div class="m-header main-logo">
+        {{-- <div class="m-header main-logo">
             <a href="#" class="b-brand">
                 @if($setting['cust_darklayout'] && $setting['cust_darklayout'] == 'on' )
 
@@ -75,7 +75,7 @@
                          alt="{{ config('app.name', 'ERPGo') }}" class="logo logo-lg">
                 @endif
             </a>
-        </div>
+        </div> --}}
         <div class="navbar-content">
             @if(\Auth::user()->type != 'client')
                 <ul class="dash-navbar">
@@ -1107,11 +1107,11 @@
                                     <span class="dash-micon"><i class="ti ti-user-check"></i></span><span class="dash-mtext">{{__('Zoom Meeting')}}</span>
                             </a>
                         </li>
-                        <li class="dash-item dash-hasmenu {{ (Request::segment(1) == 'chats')?'active':''}}">
+                        {{-- <li class="dash-item dash-hasmenu {{ (Request::segment(1) == 'chats')?'active':''}}">
                             <a href="{{ url('chats') }}" class="dash-link">
                                 <span class="dash-micon"><i class="ti ti-message-circle"></i></span><span class="dash-mtext">{{__('Messenger')}}</span>
                             </a>
-                        </li>
+                        </li> --}}
 
                         @if(\Auth::user()->type =='company')
                             <li class="dash-item dash-hasmenu {{ (Request::segment(1) == 'notification-templates')?'active':''}}">
@@ -1126,7 +1126,7 @@
                                     <span class="dash-mtext">{{ __('Email Template') }}</span></a>
                             </li>
 
-                            @include('landingpage::menu.landingpage')
+                            {{-- @include('landingpage::menu.landingpage') --}}
 
 
                         @endif

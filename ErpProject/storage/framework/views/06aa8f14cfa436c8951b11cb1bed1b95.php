@@ -63,19 +63,7 @@
     <nav class="dash-sidebar light-sidebar sidebar-collapsed">
 <?php endif; ?>
     <div class="navbar-wrapper">
-        <div class="m-header main-logo">
-            <a href="#" class="b-brand">
-                <?php if($setting['cust_darklayout'] && $setting['cust_darklayout'] == 'on' ): ?>
-
-                    <img src="<?php echo e($logo . '/' . (isset($company_logos) && !empty($company_logos) ? $company_logos : 'logo-dark.png')); ?>"
-                         alt="<?php echo e(config('app.name', 'ERPGo')); ?>" class="logo logo-lg">
-                <?php else: ?>
-
-                    <img src="<?php echo e($logo . '/' . (isset($company_logo) && !empty($company_logo) ? $company_logo : 'logo-dark.png')); ?>"
-                         alt="<?php echo e(config('app.name', 'ERPGo')); ?>" class="logo logo-lg">
-                <?php endif; ?>
-            </a>
-        </div>
+        
         <div class="navbar-content">
             <?php if(\Auth::user()->type != 'client'): ?>
                 <ul class="dash-navbar">
@@ -1051,11 +1039,7 @@
                                     <span class="dash-micon"><i class="ti ti-user-check"></i></span><span class="dash-mtext"><?php echo e(__('Zoom Meeting')); ?></span>
                             </a>
                         </li>
-                        <li class="dash-item dash-hasmenu <?php echo e((Request::segment(1) == 'chats')?'active':''); ?>">
-                            <a href="<?php echo e(url('chats')); ?>" class="dash-link">
-                                <span class="dash-micon"><i class="ti ti-message-circle"></i></span><span class="dash-mtext"><?php echo e(__('Messenger')); ?></span>
-                            </a>
-                        </li>
+                        
 
                         <?php if(\Auth::user()->type =='company'): ?>
                             <li class="dash-item dash-hasmenu <?php echo e((Request::segment(1) == 'notification-templates')?'active':''); ?>">
@@ -1070,7 +1054,7 @@
                                     <span class="dash-mtext"><?php echo e(__('Email Template')); ?></span></a>
                             </li>
 
-                            <?php echo $__env->make('landingpage::menu.landingpage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            
 
 
                         <?php endif; ?>

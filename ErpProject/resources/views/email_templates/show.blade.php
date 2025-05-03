@@ -27,25 +27,7 @@
         <div class="col-lg-6">
             <div class="text-end">
                 <div class="d-flex justify-content-end drp-languages">
-                    <ul class="list-unstyled mb-0 m-2">
-                        <li class="dropdown dash-h-item drp-language">
-                            <a class="email-color dash-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
-                               href="#" role="button" aria-haspopup="false" aria-expanded="false"
-                               id="dropdownLanguage">
-                                {{-- <i class="ti ti-world nocolor"></i> --}}
-                                <span
-                                    class="email-color drp-text hide-mob text-primary me-2">{{ ucfirst($LangName->full_name) }}</span>
-                                <i class="ti ti-chevron-down drp-arrow nocolor"></i>
-                            </a>
-                            <div class="dropdown-menu dash-h-dropdown dropdown-menu-end"
-                                 aria-labelledby="dropdownLanguage">
-                                @foreach ($languages as $code => $lang)
-                                    <a href="{{ route('manage.email.language', [$emailTemplate->id, $code]) }}"
-                                       class="dropdown-item {{ $currEmailTempLang->lang == $code ? 'text-primary' : '' }}">{{ ucfirst($lang) }}</a>
-                                @endforeach
-                            </div>
-                        </li>
-                    </ul>
+
                     <ul class="list-unstyled mb-0 m-2">
                         <li class="dropdown dash-h-item drp-language">
                             <a class="email-color dash-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"
