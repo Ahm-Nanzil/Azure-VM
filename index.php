@@ -58,7 +58,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Your ERP System</h1>
+        <h1>Welcome to ERP System</h1>
         <p>Everything is set up and ready to go!<br>Explore your powerful ERP dashboard and manage your operations efficiently.</p>
         <a class="button" href="/login">Go to Dashboard</a>
     </div>
