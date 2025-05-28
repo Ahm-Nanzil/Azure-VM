@@ -3,4 +3,4 @@ Disallow: /cgi-bin/
 Disallow: /tmp/
 Disallow: /junk-folder/   # example: if you have test folders
 Allow: /
-Sitemap: https://ahm-nanzil.azurewebsites.net/sitemap.xml
+Sitemap: https://ahm-nanzil.azurewebsites.net/sitemap_index.xml
