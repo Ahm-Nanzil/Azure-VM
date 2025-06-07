@@ -1,5 +1,9 @@
 name: Push-to-azure
 
+permissions:
+  contents: write
+  deployments: write
+
 on:
   push:
     branches:
