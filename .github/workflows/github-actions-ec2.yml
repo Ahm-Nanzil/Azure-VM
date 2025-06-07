@@ -1,6 +1,5 @@
-name: Push-to-EC2
+name: Push-to-azure
 
-# Trigger deployment only on push to main branch
 on:
   push:
     branches:
@@ -8,25 +7,36 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2 on master branch push
+    name: Deploy to Azure VM and mark Production
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout the files
+      - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Fetch all history to detect changes
+          fetch-depth: 0
 
-      - name: Deploy to Server 1
+      # Start GitHub Deployment (marks it as "production")
+      - name: Create GitHub Deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: production
+          ref: ${{ github.ref }}
+
+      - name: Deploy files to Azure VM via SSH
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.Azure_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
-          ARGS: "-avz --delete"  # -a preserves permissions, -v verbose, -z compression
-          EXCLUDE: ".git/, .github/, .gitignore, README.md"  # Files to exclude
+          ARGS: "-avz --delete"
+          EXCLUDE: ".git/, .github/, .gitignore, README.md"
 
-      - name: Setup Apache (only run once or when Apache config changes)
+      - name: Ensure Apache is running and sync to /var/www/html
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_DNS }}
@@ -40,8 +50,17 @@ jobs:
               sudo systemctl enable apache2
               sudo touch /var/www/html/.apache_installed
             fi
-            
-            # Copy files from deployment directory to web root if they don't go directly there
+
+            # Sync from TARGET_DIR to /var/www/html if needed
             if [ "${{ secrets.TARGET_DIR }}" != "/var/www/html" ]; then
               sudo rsync -av ${{ secrets.TARGET_DIR }}/ /var/www/html/
             fi
+
+      # Mark deployment as successful
+      - name: Mark GitHub Deployment as Successful
+        uses: bobheadxi/deployments@v1
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: success
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
