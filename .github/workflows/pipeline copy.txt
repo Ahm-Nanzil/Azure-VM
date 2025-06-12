@@ -67,7 +67,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
-          ARGS: "-avz --delete --chown=www-data:www-data"
+          ARGS: "-avz --delete"
           EXCLUDE: ".git/, .github/, .gitignore, README.md, .env.example, tests/, node_modules/"
 
       - name: 🔧 Server setup and post-deployment
