@@ -1,4 +1,4 @@
-name: Push-to-azure
+name: Push-to-Azure
 
 permissions:
   contents: write
@@ -9,22 +9,18 @@ on:
     branches:
       - main
 
-env:
-  DEPLOYMENT_NAME: "PHP-App-$(date +'%Y%m%d-%H%M%S')"
-
 jobs:
   deploy:
-    name: Deploy to Azure VM and mark Production
+    name: Deploy PHP App to Azure VM
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4  # Updated to latest version
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Pre-deployment health check
-      - name: Pre-deployment health check
+      - name: 🔍 Pre-deployment health check
         uses: appleboy/ssh-action@v1.0.3
         continue-on-error: true
         with:
@@ -35,10 +31,9 @@ jobs:
             echo "=== System Health Check ==="
             df -h | head -5
             free -m
-            systemctl is-active apache2 || echo "Apache not running"
+            systemctl is-active apache2 || echo "❌ Apache not running"
 
-      # Start GitHub Deployment
-      - name: Create GitHub Deployment
+      - name: 🚀 Start GitHub Deployment
         uses: bobheadxi/deployments@v1
         id: deployment
         with:
@@ -47,8 +42,7 @@ jobs:
           env: production
           ref: ${{ github.ref }}
 
-      # Create backup before deployment
-      - name: Create backup of current deployment
+      - name: 📦 Create backup of current deployment
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST_DNS }}
@@ -58,18 +52,15 @@ jobs:
             BACKUP_DIR="/var/backups/webapp/$(date +'%Y%m%d_%H%M%S')"
             sudo mkdir -p /var/backups/webapp
             if [ -d "/var/www/html" ] && [ "$(ls -A /var/www/html)" ]; then
-              echo "Creating backup at $BACKUP_DIR"
+              echo "📦 Creating backup at $BACKUP_DIR"
               sudo cp -r /var/www/html "$BACKUP_DIR"
-              echo "✅ Backup created successfully"
+              echo "✅ Backup created"
             else
-              echo "No existing deployment to backup"
+              echo "⚠️ No existing files to backup"
             fi
-            
-            # Keep only last 3 backups
             sudo find /var/backups/webapp -maxdepth 1 -type d -name "20*" | sort -r | tail -n +4 | sudo xargs rm -rf
 
-      # Deploy files
-      - name: Deploy files to Azure VM via SSH
+      - name: 📤 Deploy files via rsync over SSH
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.Azure_SSH_KEY }}
@@ -79,46 +70,46 @@ jobs:
           ARGS: "-avz --delete"
           EXCLUDE: ".git/, .github/, .gitignore, README.md, .env.example, tests/, node_modules/"
 
-      # Enhanced server setup and post-deployment
-      - name: Setup server and post-deployment tasks
+      - name: 🔧 Server setup and post-deployment
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.Azure_SSH_KEY }}
           script: |
-            echo "=== Server Setup & Post-Deployment ==="
-            
-            # Install Apache if not present
-            if [ ! -f /var/www/html/.apache_installed ]; then
+            echo "=== Post-Deployment Tasks ==="
+            APACHE_FLAG="/var/www/html/.apache_installed"
+
+            # Apache setup
+            if [ ! -f "$APACHE_FLAG" ]; then
               echo "Installing Apache..."
-              sudo apt-get -y update
-              sudo apt-get install -y apache2 php libapache2-mod-php
-              sudo systemctl start apache2
+              sudo apt-get update -y
+              sudo apt-get install -y apache2 php libapache2-mod-php curl unzip
               sudo systemctl enable apache2
-              sudo touch /var/www/html/.apache_installed
-              echo "✅ Apache installed and started"
+              sudo systemctl start apache2
+              sudo touch "$APACHE_FLAG"
+              echo "✅ Apache installed"
             fi
 
-            # Sync files to web root
+            # Sync to /var/www/html
             if [ "${{ secrets.TARGET_DIR }}" != "/var/www/html" ]; then
-              echo "Syncing files to web root..."
+              echo "Syncing to web root..."
               sudo rsync -av ${{ secrets.TARGET_DIR }}/ /var/www/html/
-              echo "✅ Files synced to web root"
+              echo "✅ Synced to /var/www/html"
             fi
 
-            # Set proper permissions
+            # Permissions
             sudo chown -R www-data:www-data /var/www/html/
             sudo chmod -R 755 /var/www/html/
-            
-            # Handle environment file
+
+            # Handle .env
             if [ -f "/var/www/html/.env.example" ] && [ ! -f "/var/www/html/.env" ]; then
               sudo cp /var/www/html/.env.example /var/www/html/.env
               sudo chown www-data:www-data /var/www/html/.env
-              echo "✅ Environment file created"
+              echo "✅ .env file created from example"
             fi
 
-            # Install Composer dependencies if composer.json exists
+            # Composer dependencies
             if [ -f "/var/www/html/composer.json" ]; then
               echo "Installing Composer dependencies..."
               cd /var/www/html
@@ -126,56 +117,50 @@ jobs:
                 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
               fi
               sudo -u www-data composer install --no-dev --optimize-autoloader --no-interaction
-              echo "✅ Composer dependencies installed"
+              echo "✅ Composer install done"
             fi
 
-            # Restart Apache to ensure changes take effect
+            # Restart Apache
             sudo systemctl reload apache2
             echo "✅ Apache reloaded"
 
-      # Post-deployment verification
-      - name: Verify deployment
+      - name: ✅ Deployment verification
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.Azure_SSH_KEY }}
           script: |
-            echo "=== Deployment Verification ==="
-            
-            # Check if Apache is running
+            echo "=== Post-Deploy Verification ==="
             if systemctl is-active --quiet apache2; then
               echo "✅ Apache is running"
             else
               echo "❌ Apache is not running"
               exit 1
             fi
-            
-            # Check if web root has files
+
             if [ "$(ls -A /var/www/html)" ]; then
-              echo "✅ Web root contains files"
+              echo "✅ Web root has files"
               ls -la /var/www/html/ | head -10
             else
               echo "❌ Web root is empty"
               exit 1
             fi
-            
-            # Basic HTTP check (if curl is available)
+
             if command -v curl &> /dev/null; then
               HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/ || echo "000")
-              if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "301" ] || [ "$HTTP_CODE" = "302" ]; then
-                echo "✅ Website responds with HTTP $HTTP_CODE"
+              if [[ "$HTTP_CODE" =~ ^2|3 ]]; then
+                echo "✅ HTTP status OK ($HTTP_CODE)"
               else
-                echo "⚠️  Website responds with HTTP $HTTP_CODE"
+                echo "⚠️ HTTP status: $HTTP_CODE"
               fi
             fi
-            
-            echo "=== Deployment completed successfully ==="
 
-      # Mark deployment as successful
-      - name: Mark GitHub Deployment as Successful
-        uses: bobheadxi/deployments@v1
+            echo "🎉 Deployment verified successfully"
+
+      - name: 🎯 Mark GitHub Deployment as Successful
         if: success()
+        uses: bobheadxi/deployments@v1
         with:
           step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -183,10 +168,9 @@ jobs:
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env: production
 
-      # Mark deployment as failed if any step fails
-      - name: Mark GitHub Deployment as Failed
-        uses: bobheadxi/deployments@v1
+      - name: ❌ Mark GitHub Deployment as Failed
         if: failure()
+        uses: bobheadxi/deployments@v1
         with:
           step: finish
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -194,8 +178,7 @@ jobs:
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           env: production
 
-      # Send notification on failure (optional)
-      - name: Notify on deployment failure
+      - name: 🚨 Notify on failure
         if: failure()
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -203,5 +186,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.Azure_SSH_KEY }}
           script: |
-            echo "❌ Deployment failed at $(date)"
-            echo "Check GitHub Actions for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "🚨 Deployment failed at $(date)"
+            echo "Check GitHub Actions run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

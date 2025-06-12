@@ -10,6 +10,14 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <?php
+    $canonical = "https://ahmnanzil.me/portfolio-details.php";
+    if (isset($_GET['name'])) {
+      $canonical .= "?name=" . urlencode($_GET['name']);
+    }
+  ?>
+  <link rel="canonical" href="<?= $canonical ?>" />
+
   <!-- Favicons -->
   <link href="assets/img/web-developer-icon-10.jpg" rel="icon">
   <link href="assets/img/software_developer.png" rel="apple-touch-icon">
