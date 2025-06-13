@@ -155,24 +155,7 @@
                 <ul>
                   <!-- <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span id="age"></span></li> -->
 
-                  <script>
-                      function calculateAge(birthDate) {
-                          const birth = new Date(birthDate);
-                          const today = new Date();
-                          let age = today.getFullYear() - birth.getFullYear();
-                          
-                          if (
-                              today.getMonth() < birth.getMonth() || 
-                              (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())
-                          ) {
-                              age--;
-                          }
                   
-                          document.getElementById("age").textContent = age;
-                      }
-                  
-                      calculateAge("2000-05-19"); // Call function with birthdate
-                  </script>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Bsc. Engineering in CSE</span></li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> 
                                       <span><a href="mailto:ahmnanzilofficial@gmail.com">ahmnanzilofficial@gmail.com</a></span>
@@ -203,7 +186,7 @@
           <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up">
             <div class="count-box">
               <i class="bi bi-emoji-smile"></i>
-              <span data-purecounter-start="0" data-purecounter-end="200" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="50" data-purecounter-duration="1" class="purecounter"></span>
               <p><strong>Happy Clients</strong> Satisfied Success</p>
             </div>
           </div>
@@ -374,6 +357,7 @@
 
         <div class="section-title">
           <h2>Resume</h2>
+          <a href="assets/pdf/Ahm Nanzil.pdf" target="_blank" class="btn btn-outline-success">View Resume</a>
           <p>
             Discover the impact of my expertise through a compelling resume that highlights my skills, achievements, and industry experience. Explore my proven track record of success and see how I can bring value, innovation, and results to your organization.
           </p>
