@@ -32,50 +32,92 @@
 
     <style>
         body {
-        font-family: 'Open Sans', sans-serif;
-        background-color: #f8f9fa;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
         }
+
         .resume-header {
-        padding: 80px 0 40px;
-        text-align: center;
+            padding: 80px 0 40px;
+            text-align: center;
         }
+
         .resume-header h1 {
-        font-family: 'Raleway', sans-serif;
-        font-weight: 700;
-        font-size: 2.5rem;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
         }
+
         .resume-header p {
-        font-size: 1.1rem;
-        color: #6c757d;
-        max-width: 700px;
-        margin: 0 auto;
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 700px;
+            margin: 0 auto;
         }
+
         .resume-card {
-        background: #fff;
-        border-radius: 1rem;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        overflow: hidden;
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
         }
+
         iframe {
-        width: 100%;
-        height: 700px;
-        border: none;
+            width: 100%;
+            height: 700px;
+            border: none;
         }
+
         .btn-group-custom {
-        margin-top: 30px;
-        text-align: center;
+            margin-top: 30px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
         }
+
         .btn-group-custom a {
-        margin: 0 10px;
+            margin: 10px 0;
+            min-width: 200px;
         }
+
         footer {
-        text-align: center;
-        padding: 30px 0;
-        background-color: #fff;
-        font-size: 0.95rem;
-        color: #6c757d;
+            text-align: center;
+            padding: 30px 0;
+            background-color: #fff;
+            font-size: 0.95rem;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .resume-header h1 {
+            font-size: 2rem;
+            }
+
+            iframe {
+            height: 500px;
+            }
+
+            .btn-group-custom {
+            flex-direction: column;
+            align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            iframe {
+            height: 400px;
+            }
+
+            .btn-group-custom a {
+            min-width: 100%;
+            font-size: 1rem;
+            padding: 0.75rem;
+            }
         }
     </style>
+
 </head>
 
 <body>
@@ -121,7 +163,7 @@
     <!-- Resume PDF Viewer -->
     <div class="container" style="padding-top: 2%;">
         <div class="resume-card">
-        <iframe src="assets/pdf/Ahm Nanzil.pdf" allowfullscreen></iframe>
+            <iframe src="assets/pdf/Ahm Nanzil.pdf#zoom=FitH" class="resume-frame" allowfullscreen></iframe>
         </div>
 
         <!-- Buttons -->
