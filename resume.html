@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,11 +9,9 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-
   <!-- Favicons -->
   <link href="assets/img/web-developer-icon-10.jpg" rel="icon">
   <link href="assets/img/software_developer.png" rel="apple-touch-icon">
-
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -29,6 +26,9 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- PDF.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
     <style>
         body {
@@ -60,12 +60,81 @@
             border-radius: 1rem;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
             overflow: hidden;
+            position: relative;
         }
 
-        iframe {
+        /* Desktop iframe styles */
+        .desktop-pdf {
             width: 100%;
             height: 700px;
             border: none;
+        }
+
+        /* Mobile PDF viewer styles */
+        .mobile-pdf-container {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: #f8f9fa;
+        }
+
+        .pdf-canvas {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            border: none;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .pdf-controls {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 8px 16px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .pdf-controls button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .pdf-controls button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .pdf-controls button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pdf-controls span {
+            color: white;
+            font-size: 14px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            color: #6c757d;
         }
 
         .btn-group-custom {
@@ -92,28 +161,42 @@
 
         @media (max-width: 768px) {
             .resume-header h1 {
-            font-size: 2rem;
+                font-size: 2rem;
             }
 
-            iframe {
-            height: 500px;
+            .desktop-pdf {
+                display: none;
+            }
+
+            .mobile-pdf-container {
+                display: block;
+                height: 600px;
             }
 
             .btn-group-custom {
-            flex-direction: column;
-            align-items: center;
+                flex-direction: column;
+                align-items: center;
             }
         }
 
         @media (max-width: 480px) {
-            iframe {
-            height: 400px;
+            .mobile-pdf-container {
+                height: 500px;
             }
 
             .btn-group-custom a {
-            min-width: 100%;
-            font-size: 1rem;
-            padding: 0.75rem;
+                min-width: 100%;
+                font-size: 1rem;
+                padding: 0.75rem;
+            }
+
+            .pdf-controls {
+                padding: 6px 12px;
+            }
+
+            .pdf-controls button {
+                font-size: 14px;
+                padding: 4px 8px;
             }
         }
     </style>
@@ -159,28 +242,38 @@
 
   <main id="main">
 
-     
-
     <!-- Resume PDF Viewer -->
     <div class="container" style="padding-top: 2%;">
         <div class="resume-card">
-            <iframe src="assets/pdf/Ahm Nanzil.pdf#zoom=FitH" class="resume-frame" allowfullscreen></iframe>
+            <!-- Desktop PDF Viewer -->
+            <iframe src="assets/pdf/Ahm Nanzil.pdf#zoom=FitH" class="desktop-pdf" allowfullscreen></iframe>
+            
+            <!-- Mobile PDF Viewer -->
+            <div class="mobile-pdf-container">
+                <div class="loading-spinner">Loading PDF...</div>
+                <div class="pdf-controls">
+                    <button id="prev-page">◀</button>
+                    <span id="page-info">1 / 1</span>
+                    <button id="next-page">▶</button>
+                    <button id="zoom-out">−</button>
+                    <button id="zoom-in">+</button>
+                </div>
+                <canvas id="pdf-canvas" class="pdf-canvas"></canvas>
+            </div>
         </div>
 
         <!-- Buttons -->
         <div class="btn-group-custom">
-        <a href="assets/pdf/Ahm Nanzil.pdf" target="_blank" class="btn btn-primary btn-lg rounded-pill px-4">
-            <i class="bi bi-eye"></i> View in New Tab
-        </a>
-        <a href="assets/pdf/Ahm Nanzil.pdf" download class="btn btn-outline-dark btn-lg rounded-pill px-4">
-            <i class="bi bi-download"></i> Download Resume
-        </a>
+            <a href="assets/pdf/Ahm Nanzil.pdf" target="_blank" class="btn btn-primary btn-lg rounded-pill px-4">
+                <i class="bi bi-eye"></i> View in New Tab
+            </a>
+            <a href="assets/pdf/Ahm Nanzil.pdf" download class="btn btn-outline-dark btn-lg rounded-pill px-4">
+                <i class="bi bi-download"></i> Download Resume
+            </a>
         </div>
     </div>
 
-
   </main>
-
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
@@ -193,8 +286,6 @@
         </div>
       </div>
     </footer><!-- End  Footer -->
-
- 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -211,6 +302,152 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Mobile PDF Viewer Script -->
+  <script>
+    // Mobile PDF viewer functionality
+    let pdfDoc = null;
+    let pageNum = 1;
+    let pageRendering = false;
+    let pageNumPending = null;
+    let scale = 1.2;
+    const canvas = document.getElementById('pdf-canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Check if we're on mobile
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
+
+    // Load PDF only on mobile
+    if (isMobile()) {
+        pdfjsLib.getDocument('assets/pdf/Ahm Nanzil.pdf').promise.then(function(pdfDoc_) {
+            pdfDoc = pdfDoc_;
+            document.getElementById('page-info').textContent = pageNum + ' / ' + pdfDoc.numPages;
+            
+            // Hide loading spinner
+            document.querySelector('.loading-spinner').style.display = 'none';
+            
+            // Initial page render
+            renderPage(pageNum);
+        }).catch(function(error) {
+            console.error('Error loading PDF:', error);
+            document.querySelector('.loading-spinner').textContent = 'Failed to load PDF';
+        });
+    }
+
+    // Render a page
+    function renderPage(num) {
+        pageRendering = true;
+        
+        pdfDoc.getPage(num).then(function(page) {
+            const viewport = page.getViewport({scale: scale});
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            
+            const renderTask = page.render(renderContext);
+            renderTask.promise.then(function() {
+                pageRendering = false;
+                if (pageNumPending !== null) {
+                    renderPage(pageNumPending);
+                    pageNumPending = null;
+                }
+            });
+        });
+
+        // Update page info
+        document.getElementById('page-info').textContent = num + ' / ' + pdfDoc.numPages;
+        
+        // Update button states
+        document.getElementById('prev-page').disabled = (num <= 1);
+        document.getElementById('next-page').disabled = (num >= pdfDoc.numPages);
+    }
+
+    // Queue rendering if another render is in progress
+    function queueRenderPage(num) {
+        if (pageRendering) {
+            pageNumPending = num;
+        } else {
+            renderPage(num);
+        }
+    }
+
+    // Previous page
+    function onPrevPage() {
+        if (pageNum <= 1) return;
+        pageNum--;
+        queueRenderPage(pageNum);
+    }
+
+    // Next page
+    function onNextPage() {
+        if (pageNum >= pdfDoc.numPages) return;
+        pageNum++;
+        queueRenderPage(pageNum);
+    }
+
+    // Zoom in
+    function onZoomIn() {
+        scale += 0.2;
+        queueRenderPage(pageNum);
+    }
+
+    // Zoom out
+    function onZoomOut() {
+        if (scale <= 0.4) return;
+        scale -= 0.2;
+        queueRenderPage(pageNum);
+    }
+
+    // Event listeners
+    document.getElementById('prev-page').addEventListener('click', onPrevPage);
+    document.getElementById('next-page').addEventListener('click', onNextPage);
+    document.getElementById('zoom-in').addEventListener('click', onZoomIn);
+    document.getElementById('zoom-out').addEventListener('click', onZoomOut);
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (isMobile() && pdfDoc) {
+            setTimeout(() => {
+                renderPage(pageNum);
+            }, 300);
+        }
+    });
+
+    // Touch gestures for mobile
+    let startX = 0;
+    let startY = 0;
+
+    canvas.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
+
+    canvas.addEventListener('touchend', function(e) {
+        if (!pdfDoc) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+
+        // Horizontal swipe detection
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                // Swipe left - next page
+                onNextPage();
+            } else {
+                // Swipe right - previous page
+                onPrevPage();
+            }
+        }
+    });
+  </script>
 
 </body>
 
