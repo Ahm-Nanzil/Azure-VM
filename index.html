@@ -71,6 +71,9 @@
     gtag('js', new Date());
     gtag('config', 'G-KEC5RX28GB');
   </script>
+  <style>
+    
+  </style>
 </head>
 
 
@@ -109,13 +112,228 @@
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
-    <div class="hero-container" data-aos="fade-in">
-      <h1>Ahm Nanzil</h1>
-      <p>I'm <span class="typed" data-typed-items="Engineer, Designer, Developer, Freelancer"></span></p>
-    </div>
-  </section><!-- End Hero -->
+    <style>
+      :root {
+        --sunset-orange: #ff6b35;
+        --sunset-yellow: #ffcc02;
+        --sunset-red: #f7931e;
+        --sunset-pink: #ff8a80;
+      }
+
+       /* Floating Particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle-1 {
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(45deg, var(--sunset-orange), var(--sunset-yellow));
+            top: 20%;
+            left: 10%;
+            animation: float1 6s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .particle-2 {
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(45deg, var(--sunset-red), var(--sunset-pink));
+            top: 60%;
+            right: 15%;
+            animation: float2 8s ease-in-out infinite;
+            box-shadow: 0 0 25px rgba(247, 147, 30, 0.4);
+        }
+
+        .particle-3 {
+            width: 6px;
+            height: 6px;
+            background: var(--sunset-yellow);
+            top: 80%;
+            left: 20%;
+            animation: float3 5s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(255, 204, 2, 0.6);
+        }
+
+        .particle-4 {
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(45deg, var(--sunset-pink), var(--sunset-orange));
+            top: 30%;
+            right: 30%;
+            animation: float4 7s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 138, 128, 0.4);
+        }
+
+        .particle-5 {
+            width: 14px;
+            height: 14px;
+            background: radial-gradient(circle, var(--sunset-orange), var(--sunset-red));
+            top: 70%;
+            right: 40%;
+            animation: float5 9s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Floating Animations */
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) translateX(20px) rotate(120deg); }
+            66% { transform: translateY(-10px) translateX(-15px) rotate(240deg); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            50% { transform: translateY(-40px) translateX(-25px) rotate(180deg); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
+            50% { transform: translateY(-20px) translateX(30px) scale(1.5); }
+        }
+
+        @keyframes float4 {
+            0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+            25% { transform: translateY(-15px) translateX(-10px) rotate(90deg); }
+            75% { transform: translateY(-35px) translateX(15px) rotate(270deg); }
+        }
+
+        @keyframes float5 {
+            0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); }
+            33% { transform: translateY(-25px) translateX(20px) rotate(120deg) scale(0.8); }
+            66% { transform: translateY(-45px) translateX(-10px) rotate(240deg) scale(1.2); }
+        }
+
+        /* Geometric Shapes */
+        .geometric-shape {
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 26px solid rgba(255, 107, 53, 0.2);
+            top: 15%;
+            right: 10%;
+            animation: rotate 10s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.3));
+        }
+
+        .diamond {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, var(--sunset-yellow), var(--sunset-orange));
+            transform: rotate(45deg);
+            top: 40%;
+            left: 20%;
+            animation: pulse 4s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 204, 2, 0.4);
+        }
+
+        .hexagon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(30deg, var(--sunset-red), var(--sunset-pink));
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            bottom: 20%;
+            right: 25%;
+            animation: bounce 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(247, 147, 30, 0.4));
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: rotate(45deg) scale(1); opacity: 1; }
+            50% { transform: rotate(45deg) scale(1.3); opacity: 0.7; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Ambient Light Effect */
+        .ambient-light {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(255, 107, 53, 0.2) 0%, 
+                rgba(255, 107, 53, 0.1) 30%, 
+                transparent 70%);
+            animation: ambientMove 12s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .ambient-light:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .ambient-light:nth-child(2) {
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 4s;
+            background: radial-gradient(circle, 
+                rgba(255, 204, 2, 0.15) 0%, 
+                rgba(255, 204, 2, 0.08) 30%, 
+                transparent 70%);
+        }
+
+        .ambient-light:nth-child(3) {
+            top: 50%;
+            left: 10%;
+            animation-delay: 8s;
+            background: radial-gradient(circle, 
+                rgba(247, 147, 30, 0.18) 0%, 
+                rgba(247, 147, 30, 0.09) 30%, 
+                transparent 70%);
+        }
+
+        @keyframes ambientMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.1); }
+            66% { transform: translate(-20px, 30px) scale(0.9); }
+        }
+
+    </style>
+ <!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex flex-column justify-content-center align-items-center position-relative overflow-hidden">
+        <!-- Ambient Light Effects -->
+        <div class="ambient-light"></div>
+        <div class="ambient-light"></div>
+        <div class="ambient-light"></div>
+        
+        <!-- Floating Particles -->
+        <div class="particle particle-1"></div>
+      
+        
+        <!-- Geometric Shapes -->
+        <div class="geometric-shape triangle"></div>
+        <div class="geometric-shape diamond"></div>
+        <div class="geometric-shape hexagon"></div>
+
+  <!-- Content -->
+  <div class="hero-container" data-aos="fade-in">
+    <h1>Ahm Nanzil</h1>
+    <p>I'm <span class="typed" data-typed-items="Engineer, Designer, Developer, Freelancer"></span></p>
+  </div>
+</section><!-- End Hero -->
+
 
   <main id="main">
 
