@@ -400,7 +400,7 @@
       position: relative;
     }
 
-    .portfolio-details-slider::after {
+    .portfolio-details-slider:hover::after {
       content: '';
       position: absolute;
       top: 0;
@@ -411,6 +411,7 @@
       animation: shimmer 2s infinite;
       z-index: 5;
     }
+
 
     @keyframes shimmer {
       0% { left: -100%; }

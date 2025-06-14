@@ -4,7 +4,7 @@
         "category": "Saas Development",
         "client": "Zenix Ltd",
         "url": "https://zenixerp.com/",
-        "description": "🚀 Transforming Business Operations with a Scalable ERP Solution! Zenix is a cutting-edge SaaS-based ERP platform designed to streamline business processes, enhance productivity, and improve workflow automation. With real-time data analytics and automated financial tracking, this solution empowers businesses to operate with efficiency and precision.",
+        "description": "🌐 Zenix ERP is a feature-rich, cloud-based SaaS platform developed for Zenix Ltd to unify and automate core business functions. From CRM, HR, and Accounting to Project Management, Manufacturing, and Fleet Tracking — it offers modular solutions for enterprises seeking real-time insights, workflow automation, and operational scalability. Designed for high efficiency, Zenix ensures data security, mobile accessibility, and smooth cross-department integration.",
         "time": "2023-02-15",
         "images": [
           "assets/img/portfolio/zenix1.png",
@@ -16,25 +16,27 @@
         "category": "Saas Development",
         "client": "NBS Ltd",
         "url": "https://www.nbs.sa/",
-        "description": "🌐 Revolutionizing SaaS Solutions for NBS Ltd! NBS is a powerful cloud-driven SaaS platform tailored for businesses seeking high-performance digital solutions. Engineered for scalability and security, this platform optimizes data management, workflow automation, and enterprise collaboration. With its intuitive dashboard and AI-powered insights, NBS enables smarter business decisions and growth.",
+        "description": "🌐 Empowering Digital Transformation for Businesses in Saudi Arabia! NBS Ltd is a comprehensive SaaS and IT service provider delivering scalable digital solutions across cloud infrastructure, app development, cybersecurity, and enterprise platforms. With a strong focus on innovation, NBS integrates multilingual SaaS tools like AppZone and secure storage solutions like BeDrive, enabling organizations to manage operations, data, and digital assets efficiently and securely.",
         "time": "2023-04-10",
         "images": [
           "assets/img/portfolio/nbs1.png",
           "assets/img/portfolio/nbs2.png"
         ]
       },
+
       {
         "name": "ritco",
         "category": "Ecommerce Development",
         "client": "Ritco Ltd",
         "url": "https://ritco.com.sa/",
-        "description": "🛍️ A Feature-Rich E-commerce Solution for Seamless Shopping! Ritco is an advanced e-commerce platform designed to offer an engaging shopping experience with smooth navigation, fast transactions, and secure payment integration. From product management to customer engagement, Ritco ensures businesses can boost sales and customer satisfaction with a highly responsive and scalable online store.",
+        "description": "🌐 Driving Digital Transformation in Riyadh with Custom E-commerce & IT Solutions! Ritco Ltd offers full‑spectrum e-commerce development and IT services, blending secure online storefronts, cloud infrastructure, networking, cybersecurity, and managed IT. Designed for reliability and growth, Ritco empowers businesses with robust platforms, scalable hosting, and ongoing support—perfect for creating seamless shopping experiences and resilient digital operations.",
         "time": "2023-09-19",
         "images": [
           "assets/img/portfolio/ritco1.png",
           "assets/img/portfolio/ritco2.png"
         ]
       },
+
       {
         "name": "canteen",
         "category": "Food delivery app",
