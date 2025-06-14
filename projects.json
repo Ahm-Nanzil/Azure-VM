@@ -19,6 +19,8 @@
         "description": "🌐 Empowering Digital Transformation for Businesses in Saudi Arabia! NBS Ltd is a comprehensive SaaS and IT service provider delivering scalable digital solutions across cloud infrastructure, app development, cybersecurity, and enterprise platforms. With a strong focus on innovation, NBS integrates multilingual SaaS tools like AppZone and secure storage solutions like BeDrive, enabling organizations to manage operations, data, and digital assets efficiently and securely.",
         "time": "2023-04-10",
         "images": [
+          "assets/img/portfolio/nbs3.png",
+          "assets/img/portfolio/nbs4.png",
           "assets/img/portfolio/nbs1.png",
           "assets/img/portfolio/nbs2.png"
         ]
@@ -33,6 +35,8 @@
         "time": "2023-09-19",
         "images": [
           "assets/img/portfolio/ritco1.png",
+          "assets/img/portfolio/ritco5.png",
+          "assets/img/portfolio/ritco4.png",
           "assets/img/portfolio/ritco2.png"
         ]
       },
@@ -97,7 +101,36 @@
               "assets/img/portfolio/diabetics1.jpg",
               "assets/img/portfolio/diabetics2.jpg"
             ]
+          },
+          {
+            "name": "edoctor",
+          "category": "Healthcare Application",
+            "client": "Uiu edu",
+            "url": "",
+          "description": "🩺 Smart Healthcare at Your Fingertips! eDoctor is an academic project developed under UIU that simulates a modern telemedicine platform. It enables virtual doctor appointments, digital prescriptions, and patient record management—designed to streamline remote healthcare delivery. With a user-friendly interface and responsive design, this solution reflects real-world medical workflow, offering insights into scalable, tech-driven health services.",
+            "time": "2022-04-23",
+            "images": [
+              "assets/img/portfolio/edoctor1.jpg",
+              "assets/img/portfolio/edoctor2.jpg",
+              "assets/img/portfolio/edoctor3.jpg",
+              "assets/img/portfolio/edoctor5.jpg"
+            ]
+          },
+          {
+            "name": "taxibooking",
+            "category": "Transport & Mobility App",
+            "client": "Moe Ed (Upwork Client)",
+            "url": "",
+            "description": "🚖 On-Demand Taxi Booking Made Simple! TaxiBooking is a dynamic ride-hailing web application developed for Moe Ed via Upwork. The platform enables users to book rides in real-time with location tracking, fare estimation, and ride history features. Designed with a clean and intuitive UI, this solution streamlines driver-passenger interactions while ensuring efficiency and convenience in urban transport systems.",
+            "time": "2022-04-23",
+            "images": [
+              "assets/img/portfolio/taxibooking1.png",
+              "assets/img/portfolio/taxibooking3.png",
+              "assets/img/portfolio/taxibooking2.png"
+            ]
           }
+
+
         
   ]
   
