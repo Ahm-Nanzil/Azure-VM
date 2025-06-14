@@ -250,7 +250,6 @@
       display: flex;
       align-items: center;
       min-height: 530px; /* Match image height */
-      border-radius: 50%;
     }
 
     @media (max-width: 991px) {
