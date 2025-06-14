@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
   <title>Portfolio Details</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
+  
   <?php
     $canonical = "https://ahmnanzil.me/portfolio-details.php";
     if (isset($_GET['name'])) {
@@ -21,63 +17,50 @@
   <link href="assets/img/web-developer-icon-10.jpg" rel="icon">
   <link href="assets/img/software_developer.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <!-- Vendor CSS -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
+  <!-- Main CSS -->
   <link href="assets/css/style.css" rel="stylesheet">
 
   <style>
-    /* Enhanced Portfolio Details Styles */
     :root {
       --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
       --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
       --light-bg: #f8fafc;
       --card-shadow: 0 20px 40px rgba(0,0,0,0.1);
       --hover-shadow: 0 30px 60px rgba(0,0,0,0.15);
-      --border-radius: 20px;
       --text-primary: #2d3748;
       --text-secondary: #718096;
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: var(--primary-gradient);
       min-height: 100vh;
     }
 
-    /* Breadcrumbs Enhancement */
+    /* Breadcrumbs */
     #breadcrumbs {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       padding: 30px 0;
-      margin-bottom: 0;
     }
 
     #breadcrumbs h2 {
       background: var(--primary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
       font-weight: 700;
       font-size: 2.5rem;
-      margin: 0;
-      text-shadow: none;
-    }
-
-    #breadcrumbs ol {
       margin: 0;
     }
 
@@ -92,10 +75,9 @@
       background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
-    /* Main Content Enhancement */
+    /* Main Content */
     #main {
       background: var(--light-bg);
       min-height: calc(100vh - 200px);
@@ -112,30 +94,25 @@
       bottom: 0;
       background: 
         radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(245, 87, 108, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 80% 80%, rgba(245, 87, 108, 0.1) 0%, transparent 50%);
       pointer-events: none;
     }
 
-    /* Portfolio Details Section */
     .portfolio-details {
       padding: 80px 0;
       position: relative;
       z-index: 1;
     }
 
-    .portfolio-details .container {
-      max-width: 1400px;
-    }
-
-    /* Image Slider Enhancement */
+    /* Image Slider */
     .portfolio-details-slider {
-      border-radius: var(--border-radius);
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: var(--card-shadow);
       background: white;
       position: relative;
       transition: all 0.3s ease;
+      margin-bottom: 30px;
     }
 
     .portfolio-details-slider:hover {
@@ -158,23 +135,6 @@
       width: 100%;
       height: 500px;
       object-fit: cover;
-      transition: all 0.3s ease;
-    }
-
-    .swiper-slide {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .swiper-slide::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 100px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.1));
-      pointer-events: none;
     }
 
     .swiper-pagination-bullet {
@@ -190,17 +150,67 @@
       transform: scale(1.2);
     }
 
-    /* Portfolio Info Card */
+    /* Navigation Buttons */
+    .swiper-button-next, .swiper-button-prev {
+      color: #667eea !important;
+      background: rgba(255, 255, 255, 0.9);
+      width: 50px !important;
+      height: 50px !important;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .swiper-button-next:hover, .swiper-button-prev:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .swiper-button-next::after, .swiper-button-prev::after {
+      font-size: 18px !important;
+      font-weight: bold;
+    }
+
+    /* Cards */
     .portfolio-info {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
       border-radius: 20px;
       padding: 40px;
-      margin-bottom: 30px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--card-shadow);
       border: 1px solid rgba(255, 255, 255, 0.3);
       position: relative;
       overflow: hidden;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease-out forwards;
+      opacity: 0;
+      transform: translateY(30px);
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .portfolio-description {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      animation: slideInFromBottom 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    .portfolio-info:hover, .portfolio-description:hover {
+      box-shadow: var(--hover-shadow);
+      transform: translateY(-5px);
     }
 
     .portfolio-info::before {
@@ -213,23 +223,60 @@
       background: var(--secondary-gradient);
     }
 
-    .portfolio-info h3 {
-      color: #2c3e50;
+    .portfolio-description::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent-gradient);
+    }
+
+    .portfolio-description {
+      animation-delay: 0.2s;
+    }
+
+    /* Overview Animation Effects */
+    .portfolio-description p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-size: 1.1rem;
+      margin: 0;
+    }
+
+    /* Responsive Container for Vertical Alignment */
+    .portfolio-info-container {
+      display: flex;
+      align-items: center;
+      min-height: 530px; /* Match image height */
+      border-radius: 50%;
+    }
+
+    @media (max-width: 991px) {
+      .portfolio-info-container {
+        min-height: auto;
+        margin-top: 0;
+      }
+    }
+
+    .portfolio-info h3, .portfolio-description h2 {
+      color: var(--text-primary);
       font-weight: 700;
       font-size: 1.8rem;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       position: relative;
       padding-bottom: 15px;
     }
 
-    .portfolio-info h3::after {
+    .portfolio-info h3::after, .portfolio-description h2::after {
       content: '';
       position: absolute;
       bottom: 0;
       left: 0;
       width: 60px;
       height: 3px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
+      background: var(--primary-gradient);
       border-radius: 2px;
     }
 
@@ -276,7 +323,6 @@
 
     .portfolio-info ul li a:hover {
       color: #667eea;
-      text-decoration: none;
     }
 
     .portfolio-info ul li a::after {
@@ -286,7 +332,7 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
+      background: var(--primary-gradient);
       transition: width 0.3s ease;
     }
 
@@ -294,58 +340,11 @@
       width: 100%;
     }
 
-    /* Project Description Enhancement */
-    .portfolio-description {
-      background: white;
-      border-radius: var(--border-radius);
-      padding: 40px;
-      box-shadow: var(--card-shadow);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-
-    .portfolio-description:hover {
-      box-shadow: var(--hover-shadow);
-      transform: translateY(-5px);
-    }
-
-    .portfolio-description::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--accent-gradient);
-    }
-
-    .portfolio-description h2 {
-      color: var(--text-primary);
-      font-weight: 700;
-      font-size: 1.8rem;
-      margin-bottom: 25px;
-      position: relative;
-    }
-
-    .portfolio-description h2::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background: var(--secondary-gradient);
-      border-radius: 2px;
-    }
-
     .portfolio-description p {
       color: var(--text-secondary);
       line-height: 1.8;
       font-size: 1.1rem;
       margin: 0;
-      position: relative;
-      z-index: 1;
     }
 
     /* Floating Elements */
@@ -376,54 +375,39 @@
       50% { transform: translateY(-20px) rotate(180deg); }
     }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      #breadcrumbs h2 {
-        font-size: 2rem;
-      }
-      
-      .portfolio-details {
-        padding: 40px 0;
-      }
-      
-      .portfolio-info, .portfolio-description {
-        padding: 25px;
-      }
-      
-      .portfolio-details-slider img {
-        height: 300px;
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    /* Loading Animation */
-    .portfolio-details-slider {
-      position: relative;
+    @keyframes slideInFromBottom {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .portfolio-details-slider:hover::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      animation: shimmer 2s infinite;
-      z-index: 5;
+    @keyframes slideInFromLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
-
-    @keyframes shimmer {
-      0% { left: -100%; }
-      100% { left: 100%; }
+    @keyframes typewriter {
+      to {
+        opacity: 1;
+      }
     }
 
-    /* Success/Error States */
+    /* Error State */
     .project-not-found {
       text-align: center;
       padding: 100px 20px;
       background: white;
-      border-radius: var(--border-radius);
+      border-radius: 20px;
       box-shadow: var(--card-shadow);
       margin: 50px auto;
       max-width: 600px;
@@ -436,38 +420,24 @@
       background: var(--secondary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
-    /* Add subtle animations */
-    .portfolio-info, .portfolio-description {
-      animation: fadeInUp 0.6s ease-out forwards;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .portfolio-description {
-      animation-delay: 0.2s;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* Responsive */
+    @media (max-width: 768px) {
+      #breadcrumbs h2 { font-size: 2rem; }
+      .portfolio-details { padding: 40px 0; }
+      .portfolio-info, .portfolio-description { padding: 25px; }
+      .portfolio-details-slider img { height: 300px; }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- ======= Mobile nav toggle button ======= -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
 
-  <!-- ======= Header ======= -->
+  <!-- Header -->
   <header id="header">
     <div class="d-flex flex-column">
-
       <div class="profile">
         <img src="assets/img/profile.jpg" alt="" class="img-fluid rounded-circle">
         <h1 class="text-light"><a href="index.html">Ahm Nanzil</a></h1>
@@ -490,14 +460,11 @@
           <li><a href="index.html#contact" class="nav-link"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
         </ul>
       </nav>
-
     </div>
   </header>
-  <!-- End Header -->
 
   <main id="main">
-
-    <!-- ======= Breadcrumbs ======= -->
+    <!-- Breadcrumbs -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
@@ -507,22 +474,21 @@
           </ol>
         </div>
       </div>
-    </section><!-- End Breadcrumbs -->
+    </section>
 
-    <!-- Floating Background Elements -->
+    <!-- Floating Elements -->
     <div class="floating-element floating-circle" style="top: 10%; left: 5%;"></div>
     <div class="floating-element floating-square" style="top: 60%; right: 10%;"></div>
     <div class="floating-element floating-circle" style="bottom: 20%; left: 20%; width: 60px; height: 60px;"></div>
 
-    <!-- ======= Portfolio Details Section ======= -->
+    <!-- Portfolio Details -->
     <section id="portfolio-details" class="portfolio-details">
       <?php
       $jsonData = file_get_contents('projects.json');
       $projects = json_decode($jsonData, true);
-
       $name = $_GET['name'] ?? '';
-
       $project = null;
+      
       foreach ($projects as $p) {
           if ($p['name'] === $name) {
               $project = $p;
@@ -531,12 +497,10 @@
       }
 
       if (!$project) {
-          echo '<div class="container">';
-          echo '<div class="project-not-found">';
+          echo '<div class="container"><div class="project-not-found">';
           echo '<h3>Project not found!</h3>';
           echo '<p>The project you are looking for does not exist or has been moved.</p>';
-          echo '</div>';
-          echo '</div>';
+          echo '</div></div>';
           exit;
       }
       ?>
@@ -548,26 +512,29 @@
                       <div class="swiper-wrapper align-items-center">
                           <?php
                           foreach ($project['images'] as $image) {
-                              echo '<div class="swiper-slide">';
-                              echo '<img src="' . $image . '" alt="Project Image">';
-                              echo '</div>';
+                              echo '<div class="swiper-slide"><img src="' . $image . '" alt="Project Image"></div>';
                           }
                           ?>
                       </div>
                       <div class="swiper-pagination"></div>
+                      <div class="swiper-button-next"></div>
+                      <div class="swiper-button-prev"></div>
                   </div>
               </div>
 
               <div class="col-lg-4">
-                  <div class="portfolio-info">
-                      <h3>Project Information</h3>
-                      <ul>
-                          <li><strong>Category</strong>: <?= $project['category'] ?></li>
-                          <li><strong>Client</strong>: <?= $project['client'] ?></li>
-                          <li><strong>Project URL</strong>: <a href="<?= $project['url'] ?>" target="_blank"><?= $project['url'] ?></a></li>
-                          <li><strong>Completion Date</strong>: <?= $project['time'] ?></li>
-                      </ul>
+                  <div class="portfolio-info-container">
+                      <div class="portfolio-info">
+                          <h3>Project Information</h3>
+                          <ul>
+                              <li><strong>Category</strong>: <?= $project['category'] ?></li>
+                              <li><strong>Client</strong>: <?= $project['client'] ?></li>
+                              <li><strong>Project URL</strong>: <a href="<?= $project['url'] ?>" target="_blank"><?= $project['url'] ?></a></li>
+                          </ul>
+                      </div>
                   </div>
+              </div>
+              <div class="col-lg-12">
                   <div class="portfolio-description">
                       <h2>Project Overview</h2>
                       <p><?= $project['description'] ?></p>
@@ -576,39 +543,58 @@
           </div>
       </div>
     </section>
-    <!-- End Portfolio Details Section -->
+  </main>
 
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
+  <!-- Footer -->
   <footer id="footer">
       <div class="container">
-        <div class="copyright">
-          Thank <strong><span>You</span></strong>
-        </div>
-        <div class="credits">
-          For Visiting <a href="http://ahmnanzil.great-site.net">My Portfolio</a>
-        </div>
+        <div class="copyright">Thank <strong><span>You</span></strong></div>
+        <div class="credits">For Visiting <a href="http://ahmnanzil.great-site.net">My Portfolio</a></div>
       </div>
-    </footer>
-    <!-- End Footer -->
+  </footer>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
+  <!-- Scripts -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <script>
+    // Initialize Swiper
+    document.addEventListener('DOMContentLoaded', function() {
+      const swiper = new Swiper('.portfolio-details-slider', {
+        loop: true,
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        effect: 'slide',
+        speed: 600,
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 0
+          },
+          768: {
+            slidesPerView: 1,
+            spaceBetween: 0
+          },
+          1024: {
+            slidesPerView: 1,
+            spaceBetween: 0
+          }
+        }
+      });
+    });
+  </script>
 </body>
-
 </html>
