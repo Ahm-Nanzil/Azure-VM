@@ -239,17 +239,32 @@
     ]
   },
   {
-  "name": "scholarship",
-  "category": "Automation & Data Scraping",
-  "client": "Fiverr Client",
-  "url": "",
-  "description": "🎓 Smart Scholarship Finder Automation! This project helps students discover scholarship opportunities efficiently by scraping and analyzing data from multiple trusted sources. Built for a Fiverr client, the system automates the search process based on criteria such as country, education level, field of study, and eligibility. It reduces manual effort and ensures timely notifications of new opportunities through email alerts or dashboard integration. Ideal for students and educational consultancies aiming to simplify the scholarship discovery process.",
-  "images": [
-    "assets/img/portfolio/schoolarship1.png",
-    "assets/img/portfolio/schoolarship2.png",
-    "assets/img/portfolio/schoolarship3.png"
-  ]
-}
+    "name": "scholarship",
+    "category": "Automation & Data Scraping",
+    "client": "Fiverr Client",
+    "url": "",
+    "description": "🎓 Smart Scholarship Finder Automation! This project helps students discover scholarship opportunities efficiently by scraping and analyzing data from multiple trusted sources. Built for a Fiverr client, the system automates the search process based on criteria such as country, education level, field of study, and eligibility. It reduces manual effort and ensures timely notifications of new opportunities through email alerts or dashboard integration. Ideal for students and educational consultancies aiming to simplify the scholarship discovery process.",
+    "images": [
+      "assets/img/portfolio/schoolarship1.png",
+      "assets/img/portfolio/schoolarship2.png",
+      "assets/img/portfolio/schoolarship3.png"
+    ]
+  },
+  {
+    "name": "emailCampaign",
+    "category": "DevOps, Automation & Lead Generation",
+    "client": "",
+    "url": "https://clienthunt.azurewebsites.net/",
+    "description": "🚀 Lead Scraping & Email Campaign Platform with Azure Deployment! This project automates the process of scraping potential leads from Google, filtering and deduplicating them against existing CSV records, and launching automated email campaigns in batches. Beyond automation, the entire system is deployed on Azure Web App and integrated with GitHub CI/CD for seamless version control and continuous deployment. It merges lead generation, smart emailing, and modern DevOps practices into one streamlined solution.",
+    "images": [
+      "assets/img/portfolio/emailCampaign1.png",
+      "assets/img/portfolio/emailCampaign3.png",
+      "assets/img/portfolio/emailCampaign4.png",
+      "assets/img/portfolio/emailCampaign2.png",
+      "assets/img/portfolio/emailCampaign5.png"
+    ]
+  }
+
 
 
 
