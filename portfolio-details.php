@@ -528,7 +528,10 @@
                           <ul>
                               <li><strong>Category</strong>: <?= $project['category'] ?></li>
                               <li><strong>Client</strong>: <?= $project['client'] ?></li>
+                              <?php if (!empty($project['url'])): ?>
                               <li><strong>Project URL</strong>: <a href="<?= $project['url'] ?>" target="_blank"><?= $project['url'] ?></a></li>
+                              <?php endif; ?>
+
                           </ul>
                       </div>
                   </div>
