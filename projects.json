@@ -163,7 +163,7 @@
   {
     "name": "sentiment",
     "category": "NLP & Sentiment Analysis",
-    "client": "Freelancer.com",
+    "client": "Freelancer",
     "url": "",
     "description": "💬 Unlocking Emotions with AI! This freelance project focuses on sentiment analysis using Natural Language Processing (NLP) techniques to detect and classify emotions from user-generated text. Built with Python and machine learning libraries like NLTK and Scikit-learn, it analyzes feedback, reviews, or social media content to determine whether sentiment is positive, negative, or neutral. Ideal for businesses aiming to understand customer emotions, the system features real-time analysis, visualization, and predictive insights—turning raw text into actionable data.",
     "images": [
@@ -172,7 +172,34 @@
       "assets/img/portfolio/sentiment3.png",
       "assets/img/portfolio/sentiment4.png"
     ]
+  },
+  {
+    "name": "flowers",
+    "category": "Machine Learning & Data Classification",
+    "client": "Freelancer",
+    "url": "",
+    "description": "🌸 Predicting Nature with Machine Learning! This project uses the famous Iris flower dataset to classify species based on petal and sepal dimensions. Built with Python, Scikit-learn, and visualization tools like Matplotlib and Seaborn, it demonstrates fundamental ML techniques such as data preprocessing, training/testing models, and evaluating performance using classification metrics. The system accurately predicts whether a flower is Iris Setosa, Versicolor, or Virginica—making it a perfect demonstration of supervised learning and pattern recognition.",
+    "images": [
+      "assets/img/portfolio/flowers1.png",
+      "assets/img/portfolio/flowers2.png",
+      "assets/img/portfolio/flowers3.png",
+      "assets/img/portfolio/flowers4.png"
+    ]
+  },
+  {
+    "name": "tuhin",
+    "category": "Portfolio Website Design",
+    "client": "Friend",
+    "url": "",
+    "description": "🎨 Clean & Responsive Portfolio Showcase! This is a personal portfolio website designed and developed using HTML, CSS, and a touch of interactivity. Built for a friend as a portfolio project, the site highlights professional experience, skills, and projects in a visually appealing layout. The design focuses on responsiveness, smooth user experience, and clean code structure—ideal for making a strong first impression online.",
+    "images": [
+      "assets/img/portfolio/tuhin1.png",
+      "assets/img/portfolio/tuhin2.png",
+      "assets/img/portfolio/tuhin3.png"
+    ]
   }
+
+
 
 
 
