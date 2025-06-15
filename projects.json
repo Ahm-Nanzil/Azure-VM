@@ -112,7 +112,7 @@
   {
     "name": "taxibooking",
     "category": "Transport & Mobility App",
-    "client": "Moe Ed (Upwork Client)",
+    "client": "Upwork",
     "url": "",
     "description": "🚖 On-Demand Taxi Booking Made Simple! TaxiBooking is a dynamic ride-hailing web application developed for Moe Ed via Upwork. The platform enables users to book rides in real-time with location tracking, fare estimation, and ride history features. Designed with a clean and intuitive UI, this solution streamlines driver-passenger interactions while ensuring efficiency and convenience in urban transport systems.",
     "images": [
@@ -154,10 +154,10 @@
     "url": "https://ieeexplore.ieee.org/document/10441556",
     "description": "🩺 TechMed is a Final Year Design Project (FYDP) developed at UIU that introduces an Enhanced Smart Healthcare Management System designed specifically for the healthcare needs of Bangladesh. Built around National ID integration, the system enables healthcare providers to instantly access critical patient data through a chip-enabled card—particularly vital in emergencies where patients cannot communicate effectively. The solution ensures centralized data access, administrative efficiency, and seamless interoperability across medical facilities. Additionally, it features an AI-powered disease prediction module using Decision Trees and Naïve Bayes classifiers for early diagnosis based on patient symptoms. The project was recognized for its innovation and impact and was officially published in IEEE Xplore.",
     "images": [
-      "assets/img/portfolio/fydp1.jpg",
-      "assets/img/portfolio/fydp2.jpg",
-      "assets/img/portfolio/fydp3.jpg",
-      "assets/img/portfolio/fydp4.jpg"
+      "assets/img/portfolio/fydp1.png",
+      "assets/img/portfolio/fydp2.png",
+      "assets/img/portfolio/fydp3.png",
+      "assets/img/portfolio/fydp4.png"
     ]
   },
   {
@@ -228,7 +228,7 @@
   {
     "name": "pdf",
     "category": "Automation & Email Integration",
-    "client": "Upwork Client",
+    "client": "Upwork",
     "url": "",
     "description": "📄 Automated PDF Generation & Email Delivery! This project streamlines document processing by dynamically generating PDF reports based on unique IDs and automatically emailing them as attachments to recipients. Built for an Upwork client, it leverages Python for backend logic and integrates a scheduled cron job to handle email dispatches without manual intervention. This automation ensures efficiency, accuracy, and timely communication—perfect for invoicing, reporting, or record distribution workflows.",
     "images": [
@@ -241,7 +241,7 @@
   {
     "name": "scholarship",
     "category": "Automation & Data Scraping",
-    "client": "Fiverr Client",
+    "client": "Fiverr",
     "url": "",
     "description": "🎓 Smart Scholarship Finder Automation! This project helps students discover scholarship opportunities efficiently by scraping and analyzing data from multiple trusted sources. Built for a Fiverr client, the system automates the search process based on criteria such as country, education level, field of study, and eligibility. It reduces manual effort and ensures timely notifications of new opportunities through email alerts or dashboard integration. Ideal for students and educational consultancies aiming to simplify the scholarship discovery process.",
     "images": [
@@ -253,7 +253,7 @@
   {
     "name": "aws",
     "category": "DevOps, CI/CD & Cloud Computing",
-    "client": "",
+    "client": "self",
     "url": "https://aws.ahmnanzil.me",
     "description": "🚀 CI/CD Deployment on AWS EC2! This project demonstrates a simple application deployed on an AWS EC2 instance using a GitHub-based CI/CD pipeline. It highlights key DevOps practices such as automated deployment, version control integration, and cloud infrastructure management. Ideal for showcasing hands-on experience with AWS cloud computing, Linux server setup, and continuous delivery workflows in a real-world environment.",
     "images": [
@@ -261,7 +261,35 @@
       "assets/img/portfolio/aws2.png",
       "assets/img/portfolio/aws3.png"
     ]
-  }
+  },
+  {
+    "name": "emailCampaign",
+    "category": "DevOps, Automation & Lead Generation",
+    "client": "Upwork Client",
+    "url": "https://clienthunt.azurewebsites.net/",
+    "description": "🚀 Lead Scraping & Email Campaign Platform with Azure Deployment! This project automates the process of scraping potential leads from Google, filtering and deduplicating them against existing CSV records, and launching automated email campaigns in batches. Beyond automation, the entire system is deployed on Azure Web App and integrated with GitHub CI/CD for seamless version control and continuous deployment. Built for an Upwork client, it merges lead generation, smart emailing, and modern DevOps practices into one streamlined solution.",
+    "images": [
+      "assets/img/portfolio/emailCampaign1.png",
+      "assets/img/portfolio/emailCampaign3.png",
+      "assets/img/portfolio/emailCampaign4.png",
+      "assets/img/portfolio/emailCampaign2.png",
+      "assets/img/portfolio/emailCampaign5.png"
+    ]
+  },
+  {
+  "name": "azurevm",
+  "category": "DevOps & Portfolio Deployment",
+  "client": "Personal Project",
+  "url": "https://www.ahmnanzil.com",
+  "description": "🛠️ DevOps-Powered Portfolio on Azure VM! This project showcases my end-to-end DevOps skills by deploying my personal portfolio on a self-managed Azure Virtual Machine. From provisioning the VM to setting up the web server and integrating GitHub CI/CD pipelines, everything was configured manually to demonstrate expertise in cloud infrastructure, automation, and continuous deployment. It reflects a full-stack deployment workflow and serves as a live example of my development and DevOps capabilities.",
+  "images": [
+    "assets/img/portfolio/mysite1.png",
+    "assets/img/portfolio/mysite2.png",
+    "assets/img/portfolio/mysite3.png"
+  ]
+}
+
+
 
 
 
