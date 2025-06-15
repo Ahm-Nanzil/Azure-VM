@@ -214,17 +214,45 @@
   },
   {
     "name": "chatbot",
-    "category": "Job Management Platform",
+    "category": "AI Chatbot & Automation",
     "client": "Freelancer",
     "url": "",
-    "description": "💼 TalentBurst is a dynamic job management platform developed as part of a university project at UIU. It streamlines the recruitment workflow by connecting job seekers and employers through a centralized, user-friendly system. The platform includes features such as job postings, application tracking, user authentication, and admin controls. Designed with scalability and real-world functionality in mind, TalentBurst offers a seamless experience for managing employment processes efficiently across various roles and departments.",
+    "description": "🤖 Smart Conversations Made Simple! This AI-powered chatbot project was developed for a freelance client to automate customer interaction and support using Natural Language Processing (NLP). Built with Python and machine learning libraries, the bot can understand user queries, provide instant responses, and escalate complex issues. Whether integrated into a website or messaging platform, the chatbot improves response time, reduces manual workload, and enhances user experience with intelligent, real-time communication.",
     "images": [
       "assets/img/portfolio/chatbot1.png",
       "assets/img/portfolio/chatbot2.png",
       "assets/img/portfolio/chatbot3.png",
       "assets/img/portfolio/chatbot4.png"
     ]
-  }
+  },
+  {
+    "name": "pdf",
+    "category": "Automation & Email Integration",
+    "client": "Upwork Client",
+    "url": "",
+    "description": "📄 Automated PDF Generation & Email Delivery! This project streamlines document processing by dynamically generating PDF reports based on unique IDs and automatically emailing them as attachments to recipients. Built for an Upwork client, it leverages Python for backend logic and integrates a scheduled cron job to handle email dispatches without manual intervention. This automation ensures efficiency, accuracy, and timely communication—perfect for invoicing, reporting, or record distribution workflows.",
+    "images": [
+      "assets/img/portfolio/pdf5.png",
+      "assets/img/portfolio/pdf1.png",
+      "assets/img/portfolio/pdf2.png",
+      "assets/img/portfolio/pdf3.png"
+    ]
+  },
+  {
+  "name": "scholarship",
+  "category": "Automation & Data Scraping",
+  "client": "Fiverr Client",
+  "url": "",
+  "description": "🎓 Smart Scholarship Finder Automation! This project helps students discover scholarship opportunities efficiently by scraping and analyzing data from multiple trusted sources. Built for a Fiverr client, the system automates the search process based on criteria such as country, education level, field of study, and eligibility. It reduces manual effort and ensures timely notifications of new opportunities through email alerts or dashboard integration. Ideal for students and educational consultancies aiming to simplify the scholarship discovery process.",
+  "images": [
+    "assets/img/portfolio/shoolarship1.png",
+    "assets/img/portfolio/shoolarship2.png",
+    "assets/img/portfolio/shoolarship3.png"
+  ]
+}
+
+
+
 
 
 
