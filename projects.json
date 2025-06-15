@@ -211,6 +211,19 @@
       "assets/img/portfolio/talentburst3.png",
       "assets/img/portfolio/talentburst4.png"
     ]
+  },
+  {
+    "name": "chatbot",
+    "category": "Job Management Platform",
+    "client": "Freelancer",
+    "url": "",
+    "description": "💼 TalentBurst is a dynamic job management platform developed as part of a university project at UIU. It streamlines the recruitment workflow by connecting job seekers and employers through a centralized, user-friendly system. The platform includes features such as job postings, application tracking, user authentication, and admin controls. Designed with scalability and real-world functionality in mind, TalentBurst offers a seamless experience for managing employment processes efficiently across various roles and departments.",
+    "images": [
+      "assets/img/portfolio/chatbot1.png",
+      "assets/img/portfolio/chatbot2.png",
+      "assets/img/portfolio/chatbot3.png",
+      "assets/img/portfolio/chatbot4.png"
+    ]
   }
 
 
