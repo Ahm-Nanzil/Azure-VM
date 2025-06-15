@@ -251,19 +251,19 @@
     ]
   },
   {
-    "name": "emailCampaign",
-    "category": "DevOps, Automation & Lead Generation",
+    "name": "aws",
+    "category": "DevOps, CI/CD & Cloud Computing",
     "client": "",
-    "url": "https://clienthunt.azurewebsites.net/",
-    "description": "🚀 Lead Scraping & Email Campaign Platform with Azure Deployment! This project automates the process of scraping potential leads from Google, filtering and deduplicating them against existing CSV records, and launching automated email campaigns in batches. Beyond automation, the entire system is deployed on Azure Web App and integrated with GitHub CI/CD for seamless version control and continuous deployment. It merges lead generation, smart emailing, and modern DevOps practices into one streamlined solution.",
+    "url": "https://aws.ahmnanzil.me",
+    "description": "🚀 CI/CD Deployment on AWS EC2! This project demonstrates a simple application deployed on an AWS EC2 instance using a GitHub-based CI/CD pipeline. It highlights key DevOps practices such as automated deployment, version control integration, and cloud infrastructure management. Ideal for showcasing hands-on experience with AWS cloud computing, Linux server setup, and continuous delivery workflows in a real-world environment.",
     "images": [
-      "assets/img/portfolio/emailCampaign1.png",
-      "assets/img/portfolio/emailCampaign3.png",
-      "assets/img/portfolio/emailCampaign4.png",
-      "assets/img/portfolio/emailCampaign2.png",
-      "assets/img/portfolio/emailCampaign5.png"
+      "assets/img/portfolio/aws1.png",
+      "assets/img/portfolio/aws2.png",
+      "assets/img/portfolio/aws3.png"
     ]
   }
+
+
 
 
 
