@@ -75,7 +75,7 @@
     <link rel="stylesheet" href=" {{ Module::asset('LandingPage:Resources/assets/css/custom.css')}}" />
     <style>
         :root {
-            --color-customColor: <?= $color ?>;    
+            --color-customColor: <?= $color ?>;
         }
     </style>
 
@@ -199,7 +199,7 @@
                     </div>
                     <div class="col-xxl-9">
                         <div class="row gy-3 row-cols-9">
-                            
+
                             @foreach (explode(',', $settings['home_logo']) as $k => $home_logo )
 
                             <div class="col-auto">
@@ -598,7 +598,7 @@
                 </div>
                 <div class="ftr-col">
                     <ul class="list-unstyled">
-    
+
                         @if (is_array(json_decode($settings['menubar_page'])) || is_object(json_decode($settings['menubar_page'])))
                             @foreach (json_decode($settings['menubar_page']) as $key => $value)
                                 @if ($value->footer == 'on' && $value->header == 'off' && $value->template_name == 'page_content')
@@ -619,7 +619,7 @@
                                 @endif
                             @endforeach
                         @endif
-    
+
                     </ul>
                 </div>
                 @if ( $settings['joinus_status'] == 'on')
