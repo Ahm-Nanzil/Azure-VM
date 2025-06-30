@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteBase /Template/iPortfolio-1.0.0/iPortfolio/
+
+# Redirect "/service-details.php?id=xyz" to "/services/xyz"
+RewriteCond %{THE_REQUEST} /service-details\.php\?id=([^&\s]+) [NC]
+RewriteRule ^services/%1? [R=301,L]
+
+# Internally rewrite "/services/xyz" to "service-details.php?id=xyz"
+RewriteRule ^services/([a-z0-9-]+)/?$ service-details.php?id=$1 [NC,L]
