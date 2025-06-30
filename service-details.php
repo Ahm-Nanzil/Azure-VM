@@ -1,4 +1,6 @@
 <?php
+$base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/') . '/';
+
 // Read the services data from JSON file
 $servicesData = file_get_contents('services.json');
 $services = json_decode($servicesData, true);
@@ -54,6 +56,7 @@ $pageTitle = $currentService ? $currentService['title'] . ' - Ahm Nanzil' : 'Ser
   <meta name="twitter:image" content="https://ahmnanzil.me/assets/img/<?php echo htmlspecialchars($currentService ? $currentService['image'] : 'services.jpg'); ?>">
   <meta name="twitter:site" content="@ahm_nanzil">
   
+  <base href="<?= $base ?>">
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -108,7 +111,7 @@ $pageTitle = $currentService ? $currentService['title'] . ' - Ahm Nanzil' : 'Ser
       <img src="assets/img/mine.jpg" alt="" class="img-fluid rounded-circle">
     </div>
 
-    <a href="index.html" class="logo d-flex align-items-center justify-content-center">
+    <a href="#" class="logo d-flex align-items-center justify-content-center">
       <!-- Uncomment the line below if you also wish to use an image logo -->
       <!-- <img src="assets/img/logo.png" alt=""> -->
       <h1 class="sitename">Ahm Nanzil</h1>
@@ -124,35 +127,33 @@ $pageTitle = $currentService ? $currentService['title'] . ' - Ahm Nanzil' : 'Ser
 
     <nav id="navmenu" class="navmenu">
       <ul>
-        <li><a href="/#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
-        <li><a href="/#about"><i class="bi bi-person navicon"></i> About</a></li>
-        <li><a href="/#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
-        <li><a href="/#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
-        <!-- <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li> -->
+        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
+        <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
+        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
+        <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
         <li class="dropdown">
-          <a href="/#services">
+          <a href="#services">
             <i class="bi bi-menu-button navicon"></i>
             <span>Services</span>
             <i class="bi bi-chevron-down toggle-dropdown"></i>
           </a>
           <ul>
-            <li><a href="#custom-web-dev">Web Development</a></li>
-            <li><a href="#software-dev">Software Apps</a></li>
-            <li><a href="#ecommerce">E-commerce</a></li>
-            <li><a href="#api-integration">API Integration</a></li>
-            <li><a href="#database">Database</a></li>
-            <li><a href="#maintenance">Support</a></li>
-            <li><a href="#bug-fix">Bug Fixes</a></li>
-            <li><a href="#coding-help">Coding Help</a></li>
-            <li><a href="#hosting">DevOps & Hosting</a></li>
+            <li><a href="services/custom-web-development"><i class="bi bi-globe2"></i> Web Development</a></li>
+            <li><a href="services/software-application-development"><i class="bi bi-cpu"></i> Software Apps</a></li>
+            <li><a href="services/ecommerce-solutions"><i class="bi bi-cart3"></i> E-commerce</a></li>
+            <li><a href="services/api-development"><i class="bi bi-share"></i> API Integration</a></li>
+            <li><a href="services/database-design"><i class="bi bi-server"></i> Database Design</a></li>
+            <li><a href="services/maintenance-support"><i class="bi bi-tools"></i> Support</a></li>
+            <li><a href="services/bug-fixing"><i class="bi bi-bug"></i> Bug Fixing</a></li>
+            <li><a href="services/coding-help"><i class="bi bi-code-slash"></i> Coding Help</a></li>
+            <li><a href="services/devops-hosting"><i class="bi bi-hdd-network"></i> DevOps & Hosting</a></li>
           </ul>
         </li>
-
         <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
       </ul>
     </nav>
-
   </header>
+
 
   <main class="main">
 
@@ -179,7 +180,7 @@ $pageTitle = $currentService ? $currentService['title'] . ' - Ahm Nanzil' : 'Ser
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
             <div class="services-list">
               <?php foreach ($services as $service): ?>
-                <a href="service-details.php?id=<?php echo htmlspecialchars($service['id']); ?>" 
+                <a href="services/<?php echo htmlspecialchars($service['id']); ?>" 
                    class="<?php echo $service['id'] === $serviceId ? 'active' : ''; ?>">
                   <?php echo htmlspecialchars($service['title']); ?>
                 </a>
