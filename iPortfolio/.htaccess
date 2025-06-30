@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /Template/iPortfolio-1.0.0/iPortfolio/
+RewriteBase /
 
 # Redirect "/service-details.php?id=xyz" to "/services/xyz"
 RewriteCond %{THE_REQUEST} /service-details\.php\?id=([^&\s]+) [NC]
