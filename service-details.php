@@ -1,13 +1,59 @@
+<?php
+// Read the services data from JSON file
+$servicesData = file_get_contents('services.json');
+$services = json_decode($servicesData, true);
+
+// Get the requested service ID from URL parameter
+$serviceId = isset($_GET['id']) ? $_GET['id'] : 'web-design';
+
+// Find the requested service
+$currentService = null;
+foreach ($services as $service) {
+    if ($service['id'] === $serviceId) {
+        $currentService = $service;
+        break;
+    }
+}
+
+// If service not found, default to the first one
+if (!$currentService && count($services) > 0) {
+    $currentService = $services[0];
+    $serviceId = $currentService['id'];
+}
+
+// Set page title based on service
+$pageTitle = $currentService ? $currentService['title'] . ' - Ahm Nanzil' : 'Service Details - Ahm Nanzil';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Resume - Ahm Nanzil</title>
-  <meta content="Professional resume of Ahm Nanzil - Web and Software Developer" name="description">
-  <meta content="resume, CV, portfolio, web developer, software engineer" name="keywords">
-
+  
+  <!-- Dynamic SEO Meta Tags -->
+  <title><?php echo htmlspecialchars($currentService ? $currentService['seo']['title'] : $pageTitle); ?></title>
+  <meta name="description" content="<?php echo htmlspecialchars($currentService ? $currentService['seo']['description'] : 'Professional services by Ahm Nanzil'); ?>">
+  <meta name="keywords" content="<?php echo htmlspecialchars($currentService ? $currentService['seo']['keywords'] : 'web development, software services, portfolio'); ?>">
+  
+  <!-- Canonical URL to avoid duplicate content -->
+  <link rel="canonical" href="https://ahmnanzil.me/service-details.php?id=<?php echo htmlspecialchars($serviceId); ?>" />
+  
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="<?php echo htmlspecialchars($currentService ? $currentService['seo']['title'] : $pageTitle); ?>">
+  <meta property="og:description" content="<?php echo htmlspecialchars($currentService ? $currentService['seo']['description'] : 'Professional services by Ahm Nanzil'); ?>">
+  <meta property="og:url" content="https://ahmnanzil.me/service-details.php?id=<?php echo htmlspecialchars($serviceId); ?>">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://ahmnanzil.me/assets/img/<?php echo htmlspecialchars($currentService ? $currentService['image'] : 'services.jpg'); ?>">
+  <meta property="og:site_name" content="Ahm Nanzil Portfolio">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?php echo htmlspecialchars($currentService ? $currentService['seo']['title'] : $pageTitle); ?>">
+  <meta name="twitter:description" content="<?php echo htmlspecialchars($currentService ? $currentService['seo']['description'] : 'Professional services by Ahm Nanzil'); ?>">
+  <meta name="twitter:image" content="https://ahmnanzil.me/assets/img/<?php echo htmlspecialchars($currentService ? $currentService['image'] : 'services.jpg'); ?>">
+  <meta name="twitter:site" content="@ahm_nanzil">
+  
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -22,34 +68,38 @@
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-  <style>
-    /* PDF Viewer Styles */
-    .pdf-container {
-      height: 80vh;
-      margin: 30px 0;
-      border: 1px solid #eee;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  
+  <!-- Schema.org markup for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "<?php echo htmlspecialchars($currentService ? $currentService['title'] : 'Professional Services'); ?>",
+    "description": "<?php echo htmlspecialchars($currentService ? $currentService['seo']['description'] : 'Professional services by Ahm Nanzil'); ?>",
+    "provider": {
+      "@type": "Person",
+      "name": "Ahm Nanzil",
+      "url": "https://ahmnanzil.me",
+      "sameAs": [
+        "https://x.com/ahm_nanzil",
+        "https://www.linkedin.com/in/ahmnanzil",
+        "https://www.instagram.com/ahm_nanzil77"
+      ]
+    },
+    "serviceType": "<?php echo htmlspecialchars($currentService ? $currentService['category'] : 'Web Development'); ?>",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Global"
     }
-    .pdf-viewer {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    .download-btn {
-      margin-top: 20px;
-    }
-    @media (max-width: 768px) {
-      .pdf-container {
-        height: 60vh;
-      }
-    }
-  </style>
+  }
+  </script>
 </head>
 
-<body class="starter-page-page">
+<body class="service-details-page">
 
   <header id="header" class="header dark-background d-flex flex-column">
     <i class="header-toggle d-xl-none bi bi-list"></i>
@@ -109,41 +159,65 @@
     <!-- Page Title -->
     <div class="page-title dark-background">
       <div class="container d-lg-flex justify-content-between align-items-center">
-        <h1 class="mb-2 mb-lg-0">My Resume</h1>
+        <h1 class="mb-2 mb-lg-0">Service Details</h1>
         <nav class="breadcrumbs">
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li class="current">Resume</li>
+            <li class="current">Service Details</li>
           </ol>
         </nav>
       </div>
     </div><!-- End Page Title -->
 
-    <!-- Resume Section -->
-    <section id="resume-pdf" class="resume-pdf section">
+    <!-- Service Details Section -->
+    <section id="service-details" class="service-details section">
+
       <div class="container">
-        <div class="section-title">
-          <h2>Professional Resume</h2>
-          <p>View or download my complete resume</p>
-        </div>
 
-        <div class="row">
-          <div class="col-lg-12">
-            <!-- PDF Embed -->
-            <div class="pdf-container">
-              <iframe src="assets/pdf/Ahm Nanzil.pdf#view=FitH" class="pdf-viewer" title="Ahm Nanzil's Resume"></iframe>
+        <div class="row gy-4">
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="services-list">
+              <?php foreach ($services as $service): ?>
+                <a href="service-details.php?id=<?php echo htmlspecialchars($service['id']); ?>" 
+                   class="<?php echo $service['id'] === $serviceId ? 'active' : ''; ?>">
+                  <?php echo htmlspecialchars($service['title']); ?>
+                </a>
+              <?php endforeach; ?>
             </div>
 
-            <!-- Download Button -->
-            <div class="text-center download-btn">
-              <a href="assets/pdf/Ahm Nanzil.pdf" download="Ahm_Nanzil_Resume.pdf" class="btn btn-primary">
-                <i class="bi bi-download"></i> Download Resume (PDF)
-              </a>
-            </div>
+            <?php if ($currentService): ?>
+              <h4><?php echo htmlspecialchars($currentService['short_description']); ?></h4>
+              <p><?php echo htmlspecialchars($currentService['summary']); ?></p>
+            <?php endif; ?>
           </div>
+
+          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+            <?php if ($currentService): ?>
+              <img src="assets/img/<?php echo htmlspecialchars($currentService['image']); ?>" alt="<?php echo htmlspecialchars($currentService['title']); ?>" class="img-fluid services-img">
+              <h3><?php echo htmlspecialchars($currentService['main_heading']); ?></h3>
+              <p><?php echo htmlspecialchars($currentService['description']); ?></p>
+              <ul>
+                <?php foreach ($currentService['features'] as $feature): ?>
+                  <li><i class="bi bi-check-circle"></i> <span><?php echo htmlspecialchars($feature); ?></span></li>
+                <?php endforeach; ?>
+              </ul>
+              <?php if (!empty($currentService['additional_info'])): ?>
+                <p><?php echo htmlspecialchars($currentService['additional_info']); ?></p>
+              <?php endif; ?>
+              <?php if (!empty($currentService['detailed_description'])): ?>
+                <p><?php echo htmlspecialchars($currentService['detailed_description']); ?></p>
+              <?php endif; ?>
+            <?php else: ?>
+              <p>Service details not found.</p>
+            <?php endif; ?>
+          </div>
+
         </div>
+
       </div>
-    </section><!-- End Resume Section -->
+
+    </section><!-- /Service Details Section -->
 
   </main>
   <style>
@@ -273,37 +347,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script>
-    if (window.innerWidth <= 768) {
-      pdfjsLib.getDocument('assets/pdf/Ahm Nanzil.pdf').promise.then(pdf => {
-        const canvas = document.getElementById('mobile-pdf');
-        const ctx = canvas.getContext('2d');
-        
-        for (let i = 1; i <= pdf.numPages; i++) {
-          pdf.getPage(i).then(page => {
-            const viewport = page.getViewport({scale: 1.2});
-            
-            if (i === 1) {
-              canvas.width = viewport.width;
-              canvas.height = viewport.height * pdf.numPages;
-            }
-            
-            const pageCanvas = document.createElement('canvas');
-            const pageCtx = pageCanvas.getContext('2d');
-            pageCanvas.width = viewport.width;
-            pageCanvas.height = viewport.height;
-            
-            page.render({
-              canvasContext: pageCtx,
-              viewport: viewport
-            }).promise.then(() => {
-              ctx.drawImage(pageCanvas, 0, (i - 1) * viewport.height);
-            });
-          });
-        }
-      });
-    }
-  </script>
+
 </body>
 
 </html>

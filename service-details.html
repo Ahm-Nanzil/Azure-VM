@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Resume - Ahm Nanzil</title>
-  <meta content="Professional resume of Ahm Nanzil - Web and Software Developer" name="description">
-  <meta content="resume, CV, portfolio, web developer, software engineer" name="keywords">
+  <title>Service Details </title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
@@ -22,82 +22,61 @@
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-  <style>
-    /* PDF Viewer Styles */
-    .pdf-container {
-      height: 80vh;
-      margin: 30px 0;
-      border: 1px solid #eee;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
-    .pdf-viewer {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    .download-btn {
-      margin-top: 20px;
-    }
-    @media (max-width: 768px) {
-      .pdf-container {
-        height: 60vh;
-      }
-    }
-  </style>
+
+
 </head>
 
-<body class="starter-page-page">
+<body class="service-details-page">
 
   <header id="header" class="header dark-background d-flex flex-column">
     <i class="header-toggle d-xl-none bi bi-list"></i>
 
     <div class="profile-img">
-      <img src="assets/img/mine.jpg" alt="" class="img-fluid rounded-circle">
+      <img src="assets/img/my-profile-img.jpg" alt="" class="img-fluid rounded-circle">
     </div>
 
     <a href="index.html" class="logo d-flex align-items-center justify-content-center">
       <!-- Uncomment the line below if you also wish to use an image logo -->
       <!-- <img src="assets/img/logo.png" alt=""> -->
-      <h1 class="sitename">Ahm Nanzil</h1>
+      <h1 class="sitename">Alex Smith</h1>
     </a>
 
     <div class="social-links text-center">
-      <a href="https://x.com/ahm_nanzil" class="twitter"><i class="bi bi-twitter-x"></i></a>
+      <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
       <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-      <a href="https://www.instagram.com/ahm_nanzil77?igsh=MWxta3pxano1N3RrbQ==" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
       <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-      <a href="https://www.linkedin.com/in/ahmnanzil" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
     </div>
 
     <nav id="navmenu" class="navmenu">
       <ul>
-        <li><a href="/#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
-        <li><a href="/#about"><i class="bi bi-person navicon"></i> About</a></li>
-        <li><a href="/#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
-        <li><a href="/#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
-        <!-- <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li> -->
-        <li class="dropdown">
-          <a href="/#services">
-            <i class="bi bi-menu-button navicon"></i>
-            <span>Services</span>
-            <i class="bi bi-chevron-down toggle-dropdown"></i>
-          </a>
+        <li><a href="#hero"><i class="bi bi-house navicon"></i>Home</a></li>
+        <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
+        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
+        <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
+        <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li>
+        <li class="dropdown"><a href="#"><i class="bi bi-menu-button navicon"></i> <span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
           <ul>
-            <li><a href="#custom-web-dev">Web Development</a></li>
-            <li><a href="#software-dev">Software Apps</a></li>
-            <li><a href="#ecommerce">E-commerce</a></li>
-            <li><a href="#api-integration">API Integration</a></li>
-            <li><a href="#database">Database</a></li>
-            <li><a href="#maintenance">Support</a></li>
-            <li><a href="#bug-fix">Bug Fixes</a></li>
-            <li><a href="#coding-help">Coding Help</a></li>
-            <li><a href="#hosting">DevOps & Hosting</a></li>
+            <li><a href="#">Dropdown 1</a></li>
+            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="#">Deep Dropdown 1</a></li>
+                <li><a href="#">Deep Dropdown 2</a></li>
+                <li><a href="#">Deep Dropdown 3</a></li>
+                <li><a href="#">Deep Dropdown 4</a></li>
+                <li><a href="#">Deep Dropdown 5</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Dropdown 2</a></li>
+            <li><a href="#">Dropdown 3</a></li>
+            <li><a href="#">Dropdown 4</a></li>
           </ul>
         </li>
-
         <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
       </ul>
     </nav>
@@ -109,43 +88,63 @@
     <!-- Page Title -->
     <div class="page-title dark-background">
       <div class="container d-lg-flex justify-content-between align-items-center">
-        <h1 class="mb-2 mb-lg-0">My Resume</h1>
+        <h1 class="mb-2 mb-lg-0">Service Details</h1>
         <nav class="breadcrumbs">
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li class="current">Resume</li>
+            <li class="current">Service Details</li>
           </ol>
         </nav>
       </div>
     </div><!-- End Page Title -->
 
-    <!-- Resume Section -->
-    <section id="resume-pdf" class="resume-pdf section">
+    <!-- Service Details Section -->
+    <section id="service-details" class="service-details section">
+
       <div class="container">
-        <div class="section-title">
-          <h2>Professional Resume</h2>
-          <p>View or download my complete resume</p>
-        </div>
 
-        <div class="row">
-          <div class="col-lg-12">
-            <!-- PDF Embed -->
-            <div class="pdf-container">
-              <iframe src="assets/pdf/Ahm Nanzil.pdf#view=FitH" class="pdf-viewer" title="Ahm Nanzil's Resume"></iframe>
+        <div class="row gy-4">
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="services-list">
+              <a href="#" class="active">Web Design</a>
+              <a href="#">Software Development</a>
+              <a href="#">Product Management</a>
+              <a href="#">Graphic Design</a>
+              <a href="#">Marketing</a>
             </div>
 
-            <!-- Download Button -->
-            <div class="text-center download-btn">
-              <a href="assets/pdf/Ahm Nanzil.pdf" download="Ahm_Nanzil_Resume.pdf" class="btn btn-primary">
-                <i class="bi bi-download"></i> Download Resume (PDF)
-              </a>
-            </div>
+            <h4>Enim qui eos rerum in delectus</h4>
+            <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p>
           </div>
+
+          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+            <img src="assets/img/services.jpg" alt="" class="img-fluid services-img">
+            <h3>Temporibus et in vero dicta aut eius lidero plastis trand lined voluptas dolorem ut voluptas</h3>
+            <p>
+              Blanditiis voluptate odit ex error ea sed officiis deserunt. Cupiditate non consequatur et doloremque consequuntur. Accusantium labore reprehenderit error temporibus saepe perferendis fuga doloribus vero. Qui omnis quo sit. Dolorem architecto eum et quos deleniti officia qui.
+            </p>
+            <ul>
+              <li><i class="bi bi-check-circle"></i> <span>Aut eum totam accusantium voluptatem.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Assumenda et porro nisi nihil nesciunt voluptatibus.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea</span></li>
+            </ul>
+            <p>
+              Est reprehenderit voluptatem necessitatibus asperiores neque sed ea illo. Deleniti quam sequi optio iste veniam repellat odit. Aut pariatur itaque nesciunt fuga.
+            </p>
+            <p>
+              Sunt rem odit accusantium omnis perspiciatis officia. Laboriosam aut consequuntur recusandae mollitia doloremque est architecto cupiditate ullam. Quia est ut occaecati fuga. Distinctio ex repellendus eveniet velit sint quia sapiente cumque. Et ipsa perferendis ut nihil. Laboriosam vel voluptates tenetur nostrum. Eaque iusto cupiditate et totam et quia dolorum in. Sunt molestiae ipsum at consequatur vero. Architecto ut pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia impedit dolore alias explicabo ea.
+            </p>
+          </div>
+
         </div>
+
       </div>
-    </section><!-- End Resume Section -->
+
+    </section><!-- /Service Details Section -->
 
   </main>
+
   <style>
     .social-connections {
       margin-top: 50px;
@@ -222,7 +221,7 @@
       }
 
   </style>
-  <footer id="footer" class="footer position-relative light-background">
+    <footer id="footer" class="footer position-relative light-background">
 
     <div class="container">
       <div class="row">
@@ -273,37 +272,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script>
-    if (window.innerWidth <= 768) {
-      pdfjsLib.getDocument('assets/pdf/Ahm Nanzil.pdf').promise.then(pdf => {
-        const canvas = document.getElementById('mobile-pdf');
-        const ctx = canvas.getContext('2d');
-        
-        for (let i = 1; i <= pdf.numPages; i++) {
-          pdf.getPage(i).then(page => {
-            const viewport = page.getViewport({scale: 1.2});
-            
-            if (i === 1) {
-              canvas.width = viewport.width;
-              canvas.height = viewport.height * pdf.numPages;
-            }
-            
-            const pageCanvas = document.createElement('canvas');
-            const pageCtx = pageCanvas.getContext('2d');
-            pageCanvas.width = viewport.width;
-            pageCanvas.height = viewport.height;
-            
-            page.render({
-              canvasContext: pageCtx,
-              viewport: viewport
-            }).promise.then(() => {
-              ctx.drawImage(pageCanvas, 0, (i - 1) * viewport.height);
-            });
-          });
-        }
-      });
-    }
-  </script>
+
 </body>
 
 </html>

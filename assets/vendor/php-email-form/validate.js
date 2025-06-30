@@ -1,8 +1,3 @@
-/**
-* PHP Email Form Validation - v3.2
-* URL: https://bootstrapmade.com/php-email-form/
-* Author: BootstrapMade.com
-*/
 (function () {
   "use strict";
 
@@ -18,7 +13,7 @@
       let recaptcha = thisForm.getAttribute('data-recaptcha-site-key');
       
       if( ! action ) {
-        displayError(thisForm, 'The form action property is not set!')
+        displayError(thisForm, 'The form action property is not set!');
         return;
       }
       thisForm.querySelector('.loading').classList.add('d-block');
@@ -37,7 +32,7 @@
                 php_email_form_submit(thisForm, action, formData);
               })
             } catch(error) {
-              displayError(thisForm, error)
+              displayError(thisForm, error);
             }
           });
         } else {
@@ -57,25 +52,20 @@
     })
     .then(response => {
       if( response.ok ) {
-        return response.text()
+        return response.text();
       } else {
         throw new Error(`${response.status} ${response.statusText} ${response.url}`); 
       }
     })
     .then(data => {
-      console.log("📌 Response Data:", data); // ✅ Log response
-    
       thisForm.querySelector('.loading').classList.remove('d-block');
-      
-      if (data.trim().toLowerCase().includes('success')) {  
+      if (data.trim() == 'OK') {
         thisForm.querySelector('.sent-message').classList.add('d-block');
-        thisForm.reset();
+        thisForm.reset(); 
       } else {
-        console.error("❌ Unexpected response:", data);
-        displayError(thisForm, data); // Show actual error message
+        throw new Error(data ? data : 'Form submission failed and no error message returned from: ' + action); 
       }
     })
-    
     .catch((error) => {
       displayError(thisForm, error);
     });
