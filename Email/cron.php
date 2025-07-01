@@ -1,5 +1,4 @@
 <?php
-// Set base directory
 $baseDir = __DIR__;
 
 // Load dependencies
@@ -32,7 +31,6 @@ if (!isset($clients[$nextIndex])) {
 
 $clientData = array_combine($headers, $clients[$nextIndex]);
 $email = $clientData['Email'];
-$name = $clientData['Customer Name'] ?? 'Customer';
 
 // Send email
 $mail = new PHPMailer(true);
@@ -48,9 +46,9 @@ try {
 
     // Email content
     $mail->setFrom($emailConfig['from_email'], $emailConfig['from_name']);
-    $mail->addAddress($email, $name);
+    $mail->addAddress($email);
     $mail->isHTML(true);
-    $mail->Subject = 'Your Subject Here';
+    $mail->Subject = "Boost Your Online Presence with a Professional Website 🌐";
     $mail->Body = $emailTemplate;
     $mail->send();
 
