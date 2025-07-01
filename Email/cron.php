@@ -48,6 +48,7 @@ try {
     $mail->setFrom($emailConfig['from_email'], $emailConfig['from_name']);
     $mail->addAddress($email);
     $mail->isHTML(true);
+    $mail->CharSet = 'UTF-8';
     $mail->Subject = "Boost Your Online Presence with a Professional Website 🌐";
     $mail->Body = $emailTemplate;
     $mail->send();
