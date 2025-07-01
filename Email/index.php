@@ -1,283 +1,423 @@
 <?php
-// /var/www/html/Email/index.php
+// Configuration Editor - index.php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Security check (commented out for now - enable after testing)
-// if ($_SERVER['REMOTE_ADDR'] !== '127.0.0.1' && $_SERVER['REMOTE_ADDR'] !== '::1') {
-//     die('Access denied');
-// }
+// File paths
+$trackingFile = 'tracking.json';
+$emailConfigFile = 'emailconfiguration.php';
 
-// Configuration
-$baseDir = __DIR__;
-$logFile = $baseDir . '/email_system.log';
-$trackingFile = $baseDir . '/tracking.json';
-$configFile = $baseDir . '/emailconfiguration.php';
-$csvFile = $baseDir . '/clients.csv';
-
-// Functions
-function getSystemStatus() {
-    global $trackingFile, $csvFile, $logFile, $configFile;
-    
-    $status = [
-        'last_sent' => 'Never',
-        'total_sent' => 0,
-        'pending' => 0,
-        'last_error' => 'None',
-        'log_size' => filesize($logFile) . ' bytes',
-        'config_exists' => file_exists($configFile),
-        'tracking_exists' => file_exists($trackingFile)
-    ];
-
-    if (file_exists($trackingFile)) {
-        $data = json_decode(file_get_contents($trackingFile), true);
-        $status['last_sent'] = date('Y-m-d H:i:s', $data['last_timestamp'] ?? time());
-        $status['total_sent'] = $data['total_sent'] ?? 0;
-    }
-
-    if (file_exists($csvFile)) {
-        $clients = array_map('str_getcsv', file($csvFile));
-        $status['pending'] = count($clients) - ($status['total_sent'] + 1);
-    }
-
-    // Get last error from log
-    $log = file_get_contents($logFile);
-    if (preg_match('/ERROR: (.+)$/m', $log, $matches)) {
-        $status['last_error'] = $matches[1];
-    }
-
-    return $status;
-}
-
-// Handle Actions
-$message = '';
+// Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['save_tracking'])) {
-        $data = [
-            'last_sent_index' => (int)$_POST['last_sent_index'],
-            'total_sent' => (int)$_POST['total_sent'],
-            'last_timestamp' => time()
-        ];
-        file_put_contents($trackingFile, json_encode($data, JSON_PRETTY_PRINT));
-        $message = 'Tracking data updated';
-    } elseif (isset($_POST['save_config'])) {
-        $config = [
-            'smtp_host' => $_POST['smtp_host'],
-            'smtp_port' => (int)$_POST['smtp_port'],
-            'smtp_username' => $_POST['smtp_username'],
-            'smtp_password' => $_POST['smtp_password'],
-            'smtp_secure' => $_POST['smtp_secure'],
-            'from_email' => $_POST['from_email'],
-            'from_name' => $_POST['from_name'],
-            'is_smtp' => true
-        ];
-        $configContent = "<?php\nreturn " . var_export($config, true) . ";\n";
-        file_put_contents($configFile, $configContent);
-        $message = 'Configuration updated';
-    }
-} elseif (isset($_GET['action'])) {
-    switch ($_GET['action']) {
-        case 'force_send':
-            exec('php ' . $baseDir . '/cron.php >> ' . $logFile . ' 2>&1', $output, $result);
-            $message = $result === 0 ? 'Email sent successfully' : 'Error sending email';
-            break;
-            
-        case 'reset_counter':
-            file_put_contents($trackingFile, json_encode(['last_sent_index' => 0, 'total_sent' => 0, 'last_timestamp' => time()]));
-            $message = 'Counter reset';
-            break;
-            
-        case 'view_log':
-            header('Content-Type: text/plain');
-            readfile($logFile);
-            exit;
-            
-        case 'edit_tracking':
-            $trackingData = file_exists($trackingFile) ? json_decode(file_get_contents($trackingFile), true) : ['last_sent_index' => 0, 'total_sent' => 0];
-            showTrackingForm($trackingData);
-            exit;
-            
-        case 'edit_config':
-            $configData = file_exists($configFile) ? require $configFile : [
-                'smtp_host' => 'smtp.gmail.com',
-                'smtp_port' => 587,
-                'smtp_username' => '',
-                'smtp_password' => '',
-                'smtp_secure' => 'tls',
-                'from_email' => '',
-                'from_name' => '',
-                'is_smtp' => true
-            ];
-            showConfigForm($configData);
-            exit;
+    $success = false;
+    $error = '';
+    
+    if (isset($_POST['action'])) {
+        switch ($_POST['action']) {
+            case 'update_tracking':
+                $lastSentIndex = (int)$_POST['last_sent_index'];
+                $totalSent = (int)$_POST['total_sent'];
+                
+                $trackingData = [
+                    'last_sent_index' => $lastSentIndex,
+                    'total_sent' => $totalSent
+                ];
+                
+                if (file_put_contents($trackingFile, json_encode($trackingData, JSON_PRETTY_PRINT))) {
+                    $success = true;
+                    $message = 'Tracking configuration updated successfully!';
+                } else {
+                    $error = 'Failed to update tracking configuration.';
+                }
+                break;
+                
+            case 'update_email':
+                $emailConfig = [
+                    'smtp_host' => $_POST['smtp_host'],
+                    'smtp_port' => (int)$_POST['smtp_port'],
+                    'smtp_username' => $_POST['smtp_username'],
+                    'smtp_password' => $_POST['smtp_password'],
+                    'from_email' => $_POST['from_email'],
+                    'from_name' => $_POST['from_name'],
+                    'is_smtp' => isset($_POST['is_smtp']),
+                    'smtp_secure' => $_POST['smtp_secure']
+                ];
+                
+                $phpContent = "<?php\nreturn " . var_export($emailConfig, true) . ";\n";
+                
+                if (file_put_contents($emailConfigFile, $phpContent)) {
+                    $success = true;
+                    $message = 'Email configuration updated successfully!';
+                } else {
+                    $error = 'Failed to update email configuration.';
+                }
+                break;
+            case 'view_log':
+                $logFile = '/var/log/email_cron.log';
+                if (file_exists($logFile)) {
+                    header('Content-Type: text/plain');
+                    readfile($logFile);
+                } else {
+                    header('Content-Type: text/plain');
+                    echo "Log file not found at: $logFile";
+                }
+                exit;
+                
+        }
     }
 }
 
-// Get current status
-$status = getSystemStatus();
-
-function showTrackingForm($data) {
-    global $baseDir;
-    ?>
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Edit Tracking Data</title>
-        <style>
-            body { font-family: Arial, sans-serif; margin: 20px; }
-            .form-group { margin-bottom: 15px; }
-            label { display: inline-block; width: 150px; }
-            input { padding: 5px; width: 300px; }
-            button { padding: 8px 15px; }
-        </style>
-    </head>
-    <body>
-        <h1>Edit Tracking Data</h1>
-        <form method="post" action="<?= htmlspecialchars($baseDir) ?>/index.php">
-            <div class="form-group">
-                <label for="last_sent_index">Last Sent Index:</label>
-                <input type="number" id="last_sent_index" name="last_sent_index" value="<?= htmlspecialchars($data['last_sent_index'] ?? 0) ?>">
-            </div>
-            <div class="form-group">
-                <label for="total_sent">Total Sent:</label>
-                <input type="number" id="total_sent" name="total_sent" value="<?= htmlspecialchars($data['total_sent'] ?? 0) ?>">
-            </div>
-            <button type="submit" name="save_tracking">Save</button>
-            <a href="<?= htmlspecialchars($baseDir) ?>/index.php"><button type="button">Cancel</button></a>
-        </form>
-    </body>
-    </html>
-    <?php
+// Load current configurations
+$trackingData = ['last_sent_index' => 0, 'total_sent' => 0];
+if (file_exists($trackingFile)) {
+    $trackingJson = file_get_contents($trackingFile);
+    $trackingData = json_decode($trackingJson, true) ?: $trackingData;
 }
 
-function showConfigForm($data) {
-    global $baseDir;
-    ?>
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Edit Email Configuration</title>
-        <style>
-            body { font-family: Arial, sans-serif; margin: 20px; }
-            .form-group { margin-bottom: 15px; }
-            label { display: inline-block; width: 200px; }
-            input, select { padding: 5px; width: 300px; }
-            button { padding: 8px 15px; }
-        </style>
-    </head>
-    <body>
-        <h1>Edit Email Configuration</h1>
-        <form method="post" action="<?= htmlspecialchars($baseDir) ?>/index.php">
-            <div class="form-group">
-                <label for="smtp_host">SMTP Host:</label>
-                <input type="text" id="smtp_host" name="smtp_host" value="<?= htmlspecialchars($data['smtp_host']) ?>">
-            </div>
-            <div class="form-group">
-                <label for="smtp_port">SMTP Port:</label>
-                <input type="number" id="smtp_port" name="smtp_port" value="<?= htmlspecialchars($data['smtp_port']) ?>">
-            </div>
-            <div class="form-group">
-                <label for="smtp_username">SMTP Username:</label>
-                <input type="text" id="smtp_username" name="smtp_username" value="<?= htmlspecialchars($data['smtp_username']) ?>">
-            </div>
-            <div class="form-group">
-                <label for="smtp_password">SMTP Password:</label>
-                <input type="password" id="smtp_password" name="smtp_password" value="<?= htmlspecialchars($data['smtp_password']) ?>">
-            </div>
-            <div class="form-group">
-                <label for="smtp_secure">SMTP Security:</label>
-                <select id="smtp_secure" name="smtp_secure">
-                    <option value="tls" <?= $data['smtp_secure'] === 'tls' ? 'selected' : '' ?>>TLS</option>
-                    <option value="ssl" <?= $data['smtp_secure'] === 'ssl' ? 'selected' : '' ?>>SSL</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="from_email">From Email:</label>
-                <input type="email" id="from_email" name="from_email" value="<?= htmlspecialchars($data['from_email']) ?>">
-            </div>
-            <div class="form-group">
-                <label for="from_name">From Name:</label>
-                <input type="text" id="from_name" name="from_name" value="<?= htmlspecialchars($data['from_name']) ?>">
-            </div>
-            <button type="submit" name="save_config">Save</button>
-            <a href="<?= htmlspecialchars($baseDir) ?>/index.php"><button type="button">Cancel</button></a>
-        </form>
-    </body>
-    </html>
-    <?php
+$emailConfig = [
+    'smtp_host' => 'smtp.gmail.com',
+    'smtp_port' => 587,
+    'smtp_username' => '',
+    'smtp_password' => '',
+    'from_email' => '',
+    'from_name' => 'Webs',
+    'is_smtp' => true,
+    'smtp_secure' => 'tls'
+];
+
+if (file_exists($emailConfigFile)) {
+    $loadedConfig = include $emailConfigFile;
+    if (is_array($loadedConfig)) {
+        $emailConfig = array_merge($emailConfig, $loadedConfig);
+    }
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Email System Control Panel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Editor</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .panel { background: #f5f5f5; padding: 20px; border-radius: 5px; }
-        .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .stat-card { background: white; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .actions { margin-top: 20px; }
-        button { padding: 8px 15px; margin-right: 10px; cursor: pointer; }
-        .error { color: red; }
-        .warning { color: orange; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .file-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .file-info h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .file-info pre {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Email System Control Panel</h1>
-    
-    <?php if ($message): ?>
-        <div style="background: #dff0d8; padding: 10px; margin-bottom: 20px; border-radius: 4px;">
-            <?= htmlspecialchars($message) ?>
-        </div>
-    <?php endif; ?>
-    
-    <div class="panel">
-        <h2>System Status</h2>
-        <div class="stats">
-            <div class="stat-card">
-                <h3>Last Sent</h3>
-                <p><?= htmlspecialchars($status['last_sent']) ?></p>
-            </div>
-            <div class="stat-card">
-                <h3>Total Sent</h3>
-                <p><?= $status['total_sent'] ?></p>
-            </div>
-            <div class="stat-card">
-                <h3>Pending Emails</h3>
-                <p><?= $status['pending'] ?></p>
-            </div>
-            <div class="stat-card">
-                <h3>Last Error</h3>
-                <p class="<?= $status['last_error'] !== 'None' ? 'error' : '' ?>">
-                    <?= htmlspecialchars($status['last_error']) ?>
-                </p>
-            </div>
-            <div class="stat-card">
-                <h3>Config Status</h3>
-                <p class="<?= $status['config_exists'] ? '' : 'warning' ?>">
-                    <?= $status['config_exists'] ? 'Exists' : 'Missing' ?>
-                </p>
-            </div>
-            <div class="stat-card">
-                <h3>Tracking Status</h3>
-                <p class="<?= $status['tracking_exists'] ? '' : 'warning' ?>">
-                    <?= $status['tracking_exists'] ? 'Exists' : 'Missing' ?>
-                </p>
-            </div>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 Configuration Editor</h1>
+            <p>Manage your tracking and email configurations</p>
         </div>
         
-        <div class="actions">
-            <h3>Actions</h3>
-            <a href="?action=force_send"><button>Send Next Email Now</button></a>
-            <a href="?action=reset_counter"><button>Reset Counter</button></a>
-            <a href="?action=edit_tracking"><button>Edit Tracking Data</button></a>
-            <a href="?action=edit_config"><button>Edit Email Config</button></a>
-            <a href="?action=view_log"><button>View Full Log</button></a>
+        <?php if (isset($success) && $success): ?>
+            <div class="alert alert-success">
+                ✅ <?php echo htmlspecialchars($message); ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (isset($error) && $error): ?>
+            <div class="alert alert-error">
+                ❌ <?php echo htmlspecialchars($error); ?>
+            </div>
+        <?php endif; ?>
+        
+        <div class="cards-container">
+            <!-- Tracking Configuration Card -->
+            <div class="card">
+                <h2>📊 Tracking Configuration</h2>
+                
+                <div class="file-info">
+                    <h3>Current tracking.json:</h3>
+                    <pre><?php echo htmlspecialchars(json_encode($trackingData, JSON_PRETTY_PRINT)); ?></pre>
+                </div>
+                
+                <form method="POST">
+                    <input type="hidden" name="action" value="update_tracking">
+                    
+                    <div class="form-group">
+                        <label for="last_sent_index">Last Sent Index:</label>
+                        <input type="number" id="last_sent_index" name="last_sent_index" 
+                               value="<?php echo htmlspecialchars($trackingData['last_sent_index']); ?>" 
+                               min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="total_sent">Total Sent:</label>
+                        <input type="number" id="total_sent" name="total_sent" 
+                               value="<?php echo htmlspecialchars($trackingData['total_sent']); ?>" 
+                               min="0" required>
+                    </div>
+                    
+                    <button type="submit" class="btn">Update Tracking Config</button>
+                </form>
+                <div class="file-info">
+                    <h3>Email System Logs</h3>
+                    <div style="margin-top: 10px;">
+                        <a href="?action=view_log" class="btn" style="text-decoration: none; text-align: center;">
+                            View Full Log
+                        </a>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <h4>Last 5 Log Entries:</h4>
+                        <pre style="max-height: 200px; overflow-y: auto;"><?php
+                            $logFile = '/var/log/email_cron.log';
+                            if (file_exists($logFile)) {
+                                $logContent = file_get_contents($logFile);
+                                $lines = array_slice(explode("\n", $logContent), -5);
+                                echo htmlspecialchars(implode("\n", $lines));
+                            } else {
+                                echo "Log file not found";
+                            }
+                        ?></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Email Configuration Card -->
+            <div class="card">
+                <h2>📧 Email Configuration</h2>
+                
+                <div class="file-info">
+                    <h3>Current emailconfiguration.php:</h3>
+                    <pre><?php echo htmlspecialchars("<?php\nreturn " . var_export($emailConfig, true) . ";\n"); ?></pre>
+                </div>
+                
+                <form method="POST">
+                    <input type="hidden" name="action" value="update_email">
+                    
+                    <div class="form-group">
+                        <label for="smtp_host">SMTP Host:</label>
+                        <input type="text" id="smtp_host" name="smtp_host" 
+                               value="<?php echo htmlspecialchars($emailConfig['smtp_host']); ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="smtp_port">SMTP Port:</label>
+                        <input type="number" id="smtp_port" name="smtp_port" 
+                               value="<?php echo htmlspecialchars($emailConfig['smtp_port']); ?>" 
+                               min="1" max="65535" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="smtp_username">SMTP Username:</label>
+                        <input type="email" id="smtp_username" name="smtp_username" 
+                               value="<?php echo htmlspecialchars($emailConfig['smtp_username']); ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="smtp_password">SMTP Password:</label>
+                        <input type="password" id="smtp_password" name="smtp_password" 
+                               value="<?php echo htmlspecialchars($emailConfig['smtp_password']); ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="from_email">From Email:</label>
+                        <input type="email" id="from_email" name="from_email" 
+                               value="<?php echo htmlspecialchars($emailConfig['from_email']); ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="from_name">From Name:</label>
+                        <input type="text" id="from_name" name="from_name" 
+                               value="<?php echo htmlspecialchars($emailConfig['from_name']); ?>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="smtp_secure">SMTP Security:</label>
+                        <select id="smtp_secure" name="smtp_secure" required>
+                            <option value="tls" <?php echo $emailConfig['smtp_secure'] === 'tls' ? 'selected' : ''; ?>>TLS</option>
+                            <option value="ssl" <?php echo $emailConfig['smtp_secure'] === 'ssl' ? 'selected' : ''; ?>>SSL</option>
+                            <option value="" <?php echo $emailConfig['smtp_secure'] === '' ? 'selected' : ''; ?>>None</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="is_smtp" name="is_smtp" 
+                                   <?php echo $emailConfig['is_smtp'] ? 'checked' : ''; ?>>
+                            <label for="is_smtp">Enable SMTP</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">Update Email Config</button>
+                </form>
+            </div>
         </div>
-    </div>
-    
-    <div style="margin-top: 30px;">
-        <h3>Cron Command</h3>
-        <code>*/3 * * * * php <?= $baseDir ?>/cron.php >> <?= $logFile ?> 2>&1</code>
     </div>
 </body>
 </html>
