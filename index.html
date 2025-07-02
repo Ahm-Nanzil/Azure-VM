@@ -1308,48 +1308,7 @@
 
   <!-- Preloader -->
   <div id="preloader"></div>
-       <script>
-           // Auto-generate beautiful preloader structure
-document.addEventListener('DOMContentLoaded', function() {
-  const preloader = document.getElementById('preloader');
-  
-  if (preloader) {
-    // Create the enhanced preloader structure
-    preloader.innerHTML = `
-      <div class="preloader-container">
-        <div class="preloader-ring">
-          <div class="preloader-inner">
-            <div class="preloader-dot"></div>
-            <div class="preloader-dot"></div>
-            <div class="preloader-dot"></div>
-          </div>
-          <div class="preloader-center"></div>
-        </div>
-        <div class="preloader-text">Loading</div>
-        <div class="preloader-progress">
-          <div class="progress-dot"></div>
-          <div class="progress-dot"></div>
-          <div class="progress-dot"></div>
-          <div class="progress-dot"></div>
-          <div class="progress-dot"></div>
-        </div>
-      </div>
-    `;
-  }
-});
 
-// Hide preloader when page is fully loaded
-window.addEventListener('load', function() {
-  const preloader = document.getElementById('preloader');
-  if (preloader) {
-    preloader.classList.add('loaded');
-    // Remove from DOM after animation completes
-    setTimeout(() => {
-      preloader.remove();
-    }, 800);
-  }
-});
-      </script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
