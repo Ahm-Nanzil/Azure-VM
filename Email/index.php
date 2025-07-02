@@ -7,6 +7,20 @@ ini_set('display_errors', 1);
 $trackingFile = 'tracking.json';
 $emailConfigFile = 'emailconfiguration.php';
 
+// Handle GET request for viewing log
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'view_log') {
+    $logFile = '/var/log/email_cron.log';
+    if (file_exists($logFile)) {
+        header('Content-Type: text/plain');
+        header('Content-Disposition: inline; filename="email_cron.log"');
+        readfile($logFile);
+    } else {
+        header('Content-Type: text/plain');
+        echo "Log file not found at: $logFile";
+    }
+    exit;
+}
+
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $success = false;
@@ -52,17 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $error = 'Failed to update email configuration.';
                 }
                 break;
-            case 'view_log':
-                $logFile = '/var/log/email_cron.log';
-                if (file_exists($logFile)) {
-                    header('Content-Type: text/plain');
-                    readfile($logFile);
-                } else {
-                    header('Content-Type: text/plain');
-                    echo "Log file not found at: $logFile";
-                }
-                exit;
-                
         }
     }
 }
@@ -211,6 +214,9 @@ if (file_exists($emailConfigFile)) {
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
         
         .btn:hover {
@@ -325,10 +331,11 @@ if (file_exists($emailConfigFile)) {
                     
                     <button type="submit" class="btn">Update Tracking Config</button>
                 </form>
+                
                 <div class="file-info">
                     <h3>Email System Logs</h3>
                     <div style="margin-top: 10px;">
-                        <a href="?action=view_log" class="btn" style="text-decoration: none; text-align: center;">
+                        <a href="?action=view_log" target="_blank" class="btn">
                             View Full Log
                         </a>
                     </div>
@@ -338,8 +345,9 @@ if (file_exists($emailConfigFile)) {
                             $logFile = '/var/log/email_cron.log';
                             if (file_exists($logFile)) {
                                 $logContent = file_get_contents($logFile);
-                                $lines = array_slice(explode("\n", $logContent), -5);
-                                echo htmlspecialchars(implode("\n", $lines));
+                                $lines = explode("\n", trim($logContent));
+                                $lastLines = array_slice($lines, -5);
+                                echo htmlspecialchars(implode("\n", $lastLines));
                             } else {
                                 echo "Log file not found";
                             }
