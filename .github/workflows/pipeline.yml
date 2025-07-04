@@ -68,7 +68,7 @@ jobs:
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
           ARGS: "-avz --delete --rsync-path='sudo rsync'"
-          EXCLUDE: ".git/, .github/, .gitignore, README.md, .env.example, tests/, node_modules/"
+          EXCLUDE: ".git/, .github/, .gitignore, README.md, .env.example, tests/, node_modules/, Email/tracking.json"
 
 
       - name: 🔧 Server setup and post-deployment
