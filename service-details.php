@@ -59,7 +59,7 @@ $pageTitle = $currentService ? $currentService['title'] . ' - Ahm Nanzil' : 'Ser
   <base href="<?= $base ?>">
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/software_developer.jpg" rel="">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
