@@ -49,7 +49,7 @@ try {
     $mail->addAddress($email);
     $mail->isHTML(true);
     $mail->CharSet = 'UTF-8';
-    $mail->Subject = "Websites Win Business – Is Yours Ready? ✨";
+    $mail->Subject = "Optimize Your Website for More Leads";
     $mail->Body = $emailTemplate;
     $mail->send();
 
