@@ -1,9 +1,46 @@
 [
+    {
+    "id": "ecommerce-solutions",
+    "title": "E-commerce Solutions & Payment Integration",
+    "category": "Web Development",
+    "image": "services/e-commerce.png",
+    "image_alt": "E-commerce development with payment integration services",
+    "seo": {
+      "title": "E-commerce Development & Payment Integration Expert | ahmnanzil.me",
+      "description": "Complete e-commerce solutions with Shopify, WooCommerce, or custom carts. Secure payment integration with PayPal, Stripe, and SSLCOMMERZ.",
+      "keywords": "ecommerce development, online store, payment gateway integration, Shopify developer, WooCommerce expert",
+      "canonical": "https://ahmnanzil.me/services/ecommerce-solutions"
+    },
+    "short_description": "Complete online stores with seamless payments",
+    "summary": "I build high-converting e-commerce platforms with optimized checkout flows and secure payment processing integration.",
+    "main_heading": "Revenue-focused e-commerce solutions",
+    "description": "From product catalogs to checkout optimization, I develop e-commerce solutions that maximize conversions while ensuring PCI compliance and seamless payment processing.",
+    "features": [
+      "Shopify & WooCommerce development",
+      "Custom shopping cart solutions",
+      "PayPal, Stripe, SSLCOMMERZ integration",
+      "Checkout flow optimization",
+      "Inventory management systems",
+      "Order processing automation",
+      "Mobile-responsive storefronts"
+    ],
+    "additional_info": "All e-commerce solutions include performance monitoring and analytics setup.",
+    "detailed_description": "I create e-commerce platforms designed to sell. Beyond just building online stores, I optimize every touchpoint in the customer journey - from product discovery to checkout completion. My solutions integrate with major payment processors and shipping providers while maintaining the highest security standards for your customers' data.",
+    "structured_data": {
+      "@type": "WebApplication",
+      "applicationCategory": "ShoppingApplication",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "Varies"
+      }
+    }
+  },
   {
     "id": "custom-web-development",
     "title": "Custom Web Development",
     "category": "Web Development",
-    "image": "services.jpg",
+    "image": "services/web.png",
     "image_alt": "Custom web application development by Ahm Nanzil",
     "seo": {
       "title": "Custom Web Development Services | Laravel & Django Expert | ahmnanzil.me",
@@ -41,7 +78,7 @@
     "id": "software-application-development",
     "title": "Software Application Development",
     "category": "Software Engineering",
-    "image": "services.jpg",
+    "image": "services/software.png",
     "image_alt": "Custom software development services by Ahm Nanzil",
     "seo": {
       "title": "Custom Software Development Services | Web & Desktop Apps | ahmnanzil.me",
@@ -76,47 +113,10 @@
     }
   },
   {
-    "id": "ecommerce-solutions",
-    "title": "E-commerce Solutions & Payment Integration",
-    "category": "Web Development",
-    "image": "services.jpg",
-    "image_alt": "E-commerce development with payment integration services",
-    "seo": {
-      "title": "E-commerce Development & Payment Integration Expert | ahmnanzil.me",
-      "description": "Complete e-commerce solutions with Shopify, WooCommerce, or custom carts. Secure payment integration with PayPal, Stripe, and SSLCOMMERZ.",
-      "keywords": "ecommerce development, online store, payment gateway integration, Shopify developer, WooCommerce expert",
-      "canonical": "https://ahmnanzil.me/services/ecommerce-solutions"
-    },
-    "short_description": "Complete online stores with seamless payments",
-    "summary": "I build high-converting e-commerce platforms with optimized checkout flows and secure payment processing integration.",
-    "main_heading": "Revenue-focused e-commerce solutions",
-    "description": "From product catalogs to checkout optimization, I develop e-commerce solutions that maximize conversions while ensuring PCI compliance and seamless payment processing.",
-    "features": [
-      "Shopify & WooCommerce development",
-      "Custom shopping cart solutions",
-      "PayPal, Stripe, SSLCOMMERZ integration",
-      "Checkout flow optimization",
-      "Inventory management systems",
-      "Order processing automation",
-      "Mobile-responsive storefronts"
-    ],
-    "additional_info": "All e-commerce solutions include performance monitoring and analytics setup.",
-    "detailed_description": "I create e-commerce platforms designed to sell. Beyond just building online stores, I optimize every touchpoint in the customer journey - from product discovery to checkout completion. My solutions integrate with major payment processors and shipping providers while maintaining the highest security standards for your customers' data.",
-    "structured_data": {
-      "@type": "WebApplication",
-      "applicationCategory": "ShoppingApplication",
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "USD",
-        "price": "Varies"
-      }
-    }
-  },
-  {
     "id": "api-development",
     "title": "API Development and Integration",
     "category": "Backend Development",
-    "image": "services.jpg",
+    "image": "services/api.png",
     "image_alt": "Custom API development and integration services",
     "seo": {
       "title": "Custom API Development & Integration Services | ahmnanzil.me",
@@ -149,7 +149,7 @@
     "id": "database-design",
     "title": "Database Design and Optimization",
     "category": "Backend Development",
-    "image": "services.jpg",
+    "image": "services/database.png",
     "image_alt": "Database design and optimization services",
     "seo": {
       "title": "Database Design & Optimization Expert | SQL & NoSQL Solutions | ahmnanzil.me",
