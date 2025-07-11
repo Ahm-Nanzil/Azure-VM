@@ -5,7 +5,7 @@ return [
   'smtp_username' => 'ahmnanzil33@gmail.com',
   'smtp_password' => 'hpitjdlzhhmnhurc',
   'from_email' => 'ahmnanzil33@gmail.com',
-  'from_name' => 'Ahm Nanzil',
+  'from_name' => 'Nanzil',
   'is_smtp' => true,
   'smtp_secure' => 'tls',
 ];

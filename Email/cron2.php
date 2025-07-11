@@ -12,7 +12,7 @@ use PHPMailer\PHPMailer\Exception;
 $emailConfig = require $baseDir . '/emailconfiguration2.php';
 $trackingFile = $baseDir . '/tracking2.json';
 $csvFile = $baseDir . '/clients.csv';
-$emailTemplate = file_get_contents($baseDir . '/emailbody.html');
+$emailTemplate = file_get_contents($baseDir . '/emailbody2.html');
 
 // Initialize tracking
 if (!file_exists($trackingFile)) {
@@ -50,7 +50,7 @@ try {
     $mail->addAddress($email);
     $mail->isHTML(true);
     $mail->CharSet = 'UTF-8';
-    $mail->Subject = "A better website means more customers—let’s talk";
+    $mail->Subject = "Website";
     $mail->Body = $emailTemplate;
     $mail->send();
 
