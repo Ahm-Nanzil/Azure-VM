@@ -182,7 +182,7 @@
     "id": "maintenance-support",
     "title": "Maintenance and Support",
     "category": "Technical Support",
-    "image": "services.jpg",
+    "image": "services/maintance.png",
     "image_alt": "Software maintenance and technical support services",
     "seo": {
       "title": "Software Maintenance & Technical Support Services | ahmnanzil.me",
@@ -215,7 +215,7 @@
     "id": "bug-fixing",
     "title": "Bug Fixing & Optimization",
     "category": "Technical Support",
-    "image": "services.jpg",
+    "image": "services/bug.png",
     "image_alt": "Software bug fixing and performance optimization services",
     "seo": {
       "title": "Bug Fixing & Performance Optimization Services | ahmnanzil.me",
@@ -248,7 +248,7 @@
     "id": "coding-help",
     "title": "Coding Help & Algorithm Solutions",
     "category": "Programming Help",
-    "image": "services.jpg",
+    "image": "services/coding.png",
     "image_alt": "Programming help and algorithm solutions services",
     "seo": {
       "title": "Programming Help & Algorithm Solutions | ahmnanzil.me",
@@ -281,7 +281,7 @@
     "id": "devops-hosting",
     "title": "Hosting, Deployment & DevOps",
     "category": "Infrastructure",
-    "image": "services.jpg",
+    "image": "services/hosting.png",
     "image_alt": "DevOps and hosting deployment services",
     "seo": {
       "title": "DevOps & Hosting Deployment Services | AWS, Azure Expert | ahmnanzil.me",
