@@ -1,8 +1,8 @@
 <?php
 
 // Random delay between 0 and 3600 seconds (0 to 60 minutes)
-$sleepSeconds = rand(0, 300);
-sleep($sleepSeconds);
+// $sleepSeconds = rand(0, 300);
+// sleep($sleepSeconds);
 
 $baseDir = __DIR__;
 
