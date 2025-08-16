@@ -54,7 +54,7 @@ try {
     $mail->addAddress($email);
     $mail->isHTML(true);
     $mail->CharSet = 'UTF-8';
-    $mail->Subject = "Your Website: The Foundation of Your Online Presence";
+    $mail->Subject = "Custom Websites & Business Solutions";
     $mail->Body = $emailTemplate;
     $mail->send();
 
